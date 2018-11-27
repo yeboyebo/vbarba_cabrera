@@ -1,0 +1,24 @@
+{
+    "name": "vbarba_cabrera_2",
+    "modifications": {
+        "addFile": [],
+        "replaceFile": [
+            {
+                "name": "dependencias.json",
+                "path": "config/"
+            }
+        ],
+        "patchJson": [
+            {
+                "name": "urls.json",
+                "path": "config/"
+            },
+            {
+                "name": "registros.json",
+                "path": "config/"
+            }
+        ],
+        "patchScript": [],
+        "deleteFile": []
+    }
+}
