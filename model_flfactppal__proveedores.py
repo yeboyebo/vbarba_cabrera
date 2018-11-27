@@ -1,6 +1,6 @@
 
 # @class_declaration vbarba_cabrera_proveedores #
-class vbarba_cabrera_proveedores(new_oficial_proveedores, helpers.MixinConAcciones):
+class vbarba_cabrera_proveedores(oficial_proveedores, helpers.MixinConAcciones):
     pass
 
     class Meta:

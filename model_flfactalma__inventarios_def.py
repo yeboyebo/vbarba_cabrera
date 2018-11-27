@@ -4,7 +4,7 @@ from YBUTILS.viewREST import cacheController
 from models.flfactalma import flfactalma_def
 
 
-class vbarba_cabrera(new_oficial):
+class vbarba_cabrera(oficial):
 
     def vbarba_cabrera_getServerData(self, model, name):
         return []

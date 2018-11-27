@@ -1,6 +1,6 @@
 
 # @class_declaration vbarba_cabrera_clientes #
-class vbarba_cabrera_clientes(new_oficial_clientes, helpers.MixinConAcciones):
+class vbarba_cabrera_clientes(oficial_clientes, helpers.MixinConAcciones):
     pass
 
     class Meta:

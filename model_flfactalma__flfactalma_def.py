@@ -1,5 +1,5 @@
 
-/** @delete_class new_oficial */
+/** @delete_class oficial */
 
 # @class_declaration vbarba_cabrera #
 from YBLEGACY.constantes import *

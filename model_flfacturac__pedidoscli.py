@@ -1,6 +1,6 @@
 
 # @class_declaration vbarba_cabrera_pedidoscli #
-class vbarba_cabrera_pedidoscli(new_oficial_pedidoscli, helpers.MixinConAcciones):
+class vbarba_cabrera_pedidoscli(oficial_pedidoscli, helpers.MixinConAcciones):
     pass
 
     class Meta:

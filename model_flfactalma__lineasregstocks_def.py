@@ -5,7 +5,7 @@ from models.flfactalma.stocks import stocks
 from models.flfactalma.vb_ubicaciones import vb_ubicaciones
 
 
-class vbarba_cabrera(new_oficial):
+class vbarba_cabrera(oficial):
 
     def vbarba_cabrera_field_codubicacion(self, model):
         cstocks = stocks.objects.get(pk=model.idstock)

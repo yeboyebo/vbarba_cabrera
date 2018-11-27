@@ -1,6 +1,6 @@
 
 # @class_declaration vbarba_cabrera_almacenes #
-class vbarba_cabrera_almacenes(new_oficial_almacenes, helpers.MixinConAcciones):
+class vbarba_cabrera_almacenes(oficial_almacenes, helpers.MixinConAcciones):
     pass
 
     class Meta:

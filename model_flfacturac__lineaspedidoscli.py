@@ -1,6 +1,6 @@
 
 # @class_declaration vbarba_cabrera_lineaspedidoscli #
-class vbarba_cabrera_lineaspedidoscli(new_oficial_lineaspedidoscli, helpers.MixinConAcciones):
+class vbarba_cabrera_lineaspedidoscli(oficial_lineaspedidoscli, helpers.MixinConAcciones):
     pass
 
     class Meta:

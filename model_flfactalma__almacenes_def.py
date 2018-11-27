@@ -6,7 +6,7 @@ from YBUTILS.viewREST import cacheController
 from models.flfactalma.almacenes import almacenes
 
 
-class vbarba_cabrera(new_oficial):
+class vbarba_cabrera(oficial):
 
     def vbarba_cabrera_getFilters(self, model, name, template=None):
         if name == 'almacenesUsuario':

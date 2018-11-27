@@ -109,6 +109,10 @@
             {
                 "path": "models/flfacturac/",
                 "name": "model_flfacturac__lineascarrospisos_def.py"
+            },
+            {
+                "path": "models/models/",
+                "name": "model_models__clientBch.py"
             }
         ],
         "replaceFile": [

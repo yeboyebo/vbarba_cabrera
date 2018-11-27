@@ -1,7 +1,7 @@
 
 # @class_declaration vbarba_cabrera #
 
-class vbarba_cabrera(new_oficial):
+class vbarba_cabrera(oficial):
 
     def vbarba_cabrera_getForeignFields(self, model, template):
         print("_____", template)

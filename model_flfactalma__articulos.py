@@ -1,6 +1,6 @@
 
 # @class_declaration vbarba_cabrera_articulos #
-class vbarba_cabrera_articulos(new_oficial_articulos, helpers.MixinConAcciones):
+class vbarba_cabrera_articulos(oficial_articulos, helpers.MixinConAcciones):
     pass
 
     class Meta:

@@ -3,7 +3,7 @@
 from YBLEGACY.constantes import *
 
 
-class vbarba_cabrera(new_oficial):
+class vbarba_cabrera(oficial):
 
     def vbarba_cabrera_getDesc(self):
         desc = "descripcion"

@@ -1,6 +1,6 @@
 
 # @class_declaration vbarba_cabrera_stocks #
-class vbarba_cabrera_stocks(new_oficial_stocks, helpers.MixinConAcciones):
+class vbarba_cabrera_stocks(oficial_stocks, helpers.MixinConAcciones):
     pass
 
     class Meta:
