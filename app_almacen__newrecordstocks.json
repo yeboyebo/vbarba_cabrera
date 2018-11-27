@@ -1,0 +1,103 @@
+{
+    "modifications": [
+        {
+            "type": "insertAfterNode",
+            "path": "/root",
+            "value": {
+                "querystring": {}
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/querystring",
+            "value": {
+                "schema": {}
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/schema",
+            "value": {
+                "layout": {
+                    "labelFincaActual": {
+                        "componente": "YBLabel",
+                        "text": "Finca: %yb1",
+                        "style": {
+                            "fontSize": "12px",
+                            "width": "100%",
+                            "textAlign": "right"
+                        },
+                        "params": [
+                            {
+                                "type": "calc",
+                                "key": "fincaActual"
+                            }
+                        ]
+                    },
+                    "field_codalmacen": {
+                        "componente": "YBFieldDB",
+                        "prefix": "stocks",
+                        "desc_name": "Almacén",
+                        "auto_name": "Almacén",
+                        "tipo": 55,
+                        "rel": "almacenes",
+                        "key": "codalmacen",
+                        "desc": "nombre",
+                        "filtro": {
+                            "f_almacenesUsuario": null
+                        },
+                        "showpk": false,
+                        "actions": [
+                            {
+                                "signal": "enterPressed",
+                                "key": "actNuevoStock",
+                                "success": [
+                                    {
+                                        "slot": "return"
+                                    }
+                                ],
+                                "error": "Error al crear stock, el almacén ya existe"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/layout",
+            "value": {
+                "acciones": {
+                    "actNuevoStock": {
+                        "action": "actionCreate",
+                        "icon": "payment",
+                        "prefix": "stocks",
+                        "serverAction": "altaStock",
+                        "params": [
+                            {
+                                "tipo": 3,
+                                "verbose_name": "Almacen",
+                                "key": "codalmacen",
+                                "validaciones": null
+                            },
+                            {
+                                "tipo": 3,
+                                "verbose_name": "descripcion",
+                                "key": "descripcion",
+                                "validaciones": null,
+                                "null": true
+                            },
+                            {
+                                "tipo": 3,
+                                "verbose_name": "Detalle Ubicación",
+                                "key": "detalleubicacion",
+                                "validaciones": null,
+                                "null": true
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

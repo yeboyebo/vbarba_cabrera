@@ -1,0 +1,54 @@
+{
+    "initValidation": {
+        "error": {
+            "aplic": "almacen",
+            "prefix": "vb_almacenesusu",
+            "template": "almacenusu",
+            "msg": "Debes seleccionar un almacen local"
+        }
+    },
+    "querystring": {
+        "p_l": 50,
+        "p_c": true,
+        "o_1": "codinventario",
+        "s_vb_estado__exact": "Abierto",
+        "f_almacenUsuario": null
+    },
+    "schema": {},
+    "layout": {
+        "masterGrid": {
+            "label": "Inventarios",
+            "componente": "YBTable",
+            "class": "claseGrid",
+            "prefix": "master",
+            "filter": "buscador",
+            "columns": [
+                {"tipo": "field", "key": "codinventario", "pk": "true", "width": 70},
+                {"tipo": "field", "key": "codalmacen"},
+                {"tipo": "field", "key": "fecha"},
+                {"tipo": "field", "key": "hora"},
+                {"tipo": "field", "key": "vb_total", "label": "Total"},
+                {"tipo": "field", "key": "vb_estado"},
+                {
+                    "tipo": "act",
+                    "key": "delete",
+                    "label": "Delete",
+                    "success": [{"receiver": "tdb_bancos", "slot": "refrescar"}]
+                }
+            ],
+            "rowclick": "link"
+        },
+        "newRecordInventarios": {
+            "componente": "YBNewRecord",
+            "class": "info",
+            "icon": "add"
+        }
+    },
+    "acciones": {
+        "delete": {
+            "label": "Prueba",
+            "action": "deleteRow",
+            "icon": "delete"
+        }
+    }
+}

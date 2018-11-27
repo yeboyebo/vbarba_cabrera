@@ -1,0 +1,59 @@
+{
+    "modifications": [
+        {
+            "type": "insertAfterNode",
+            "path": "/root",
+            "value": {
+                "querystring": {}
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/querystring",
+            "value": {
+                "schema": {}
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/schema",
+            "value": {
+                "layout": {
+                    "articulosForm": {
+                        "prefix": "articulosprov",
+                        "componente": "YBForm",
+                        "class": "claseGrid",
+                        "submit": "update",
+                        "return": true,
+                        "success": [
+                            {
+                                "slot": "return"
+                            }
+                        ],
+                        "fields": {
+                            "gb__": {
+                                "fields": {
+                                    "descripcion": {
+                                        "disabled": true
+                                    },
+                                    "nombre": {
+                                        "disabled": true
+                                    },
+                                    "disponible": {},
+                                    "codbarras": {},
+                                    "coste": {},
+                                    "dto": {},
+                                    "costereal": {
+                                        "label": "Coste Real",
+                                        "disabled": true
+                                    }
+                                }
+                            }
+                        },
+                        "exclude": {}
+                    }
+                }
+            }
+        }
+    ]
+}

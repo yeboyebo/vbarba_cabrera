@@ -1,0 +1,197 @@
+{
+    "modifications": [
+        {
+            "type": "insertAfterNode",
+            "path": "/root",
+            "value": {
+                "querystring": {}
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/querystring",
+            "value": {
+                "schema": {
+                    "articulosprov": {
+                        "rel": "referencia",
+                        "querystring": {}
+                    }
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/schema",
+            "value": {
+                "layout": {
+                    "labelDetalle": {
+                        "componente": "YBLabel",
+                        "style": {
+                            "fontSize": "18px",
+                            "fontWeight": "bold",
+                            "width": "100%",
+                            "textAlign": "center"
+                        },
+                        "text": "%yb1 / %yb2",
+                        "params": [
+                            {
+                                "type": "model",
+                                "key": "referencia"
+                            },
+                            {
+                                "type": "model",
+                                "key": "descripcion"
+                            }
+                        ]
+                    },
+                    "groupBoxAcciones": {
+                        "componente": "YBGroupBox",
+                        "className": "",
+                        "layout": {
+                            "cargaImagen": {
+                                "componente": "YBButton",
+                                "prefix": "articulos",
+                                "icon": "camera_alt",
+                                "className": "floatRight",
+                                "buttonType": "raised",
+                                "action": {
+                                    "key": "cargaImagen",
+                                    "success": []
+                                }
+                            },
+                            "verImagen": {
+                                "componente": "YBButton",
+                                "prefix": "articulos",
+                                "icon": "photo",
+                                "className": "floatRight",
+                                "buttonType": "raised",
+                                "action": {
+                                    "key": "verImagen",
+                                    "success": []
+                                }
+                            }
+                        }
+                    },
+                    "tieneFoto": {
+                        "componente": "YBLabel",
+                        "text": "Foto: %yb1",
+                        "style": {
+                            "fontSize": "16px",
+                            "fontWeight": "400",
+                            "position": "relative",
+                            "float": "right"
+                        },
+                        "params": [
+                            {
+                                "type": "calc",
+                                "key": "tieneFoto"
+                            }
+                        ]
+                    },
+                    "articuosForm": {
+                        "prefix": "articulos",
+                        "componente": "YBForm",
+                        "class": "claseGrid",
+                        "submit": "update",
+                        "return": true,
+                        "success": [
+                            {
+                                "slot": "return"
+                            }
+                        ],
+                        "fields": {
+                            "gb__general": {
+                                "title": "General",
+                                "fields": {
+                                    "descripcion": {
+                                        "disabled": true
+                                    },
+                                    "vbnombre1": {},
+                                    "vbnombre2": {},
+                                    "vbnombre3": {},
+                                    "vbnombre4": {},
+                                    "litraje": {},
+                                    "forma": {},
+                                    "altura": {},
+                                    "perimetro": {}
+                                }
+                            },
+                            "gb__caracteristicas": {
+                                "title": "Características",
+                                "fields": {
+                                    "codfamilia": {
+                                        "rel": "familias",
+                                        "key": "codfamilia",
+                                        "desc": "descripcion",
+                                        "desc_name": "Descripción Familia"
+                                    },
+                                    "pvp": {},
+                                    "pvpbnp": {},
+                                    "codbarras": {}
+                                }
+                            }
+                        },
+                        "exclude": {}
+                    },
+                    "articulosprovgrid": {
+                        "label": "Articulos proveedor",
+                        "componente": "YBTable",
+                        "prefix": "articulosprov",
+                        "class": "claseGrid",
+                        "columns": [
+                            {
+                                "tipo": "field",
+                                "key": "nombre"
+                            },
+                            {
+                                "tipo": "field",
+                                "key": "pvp"
+                            },
+                            {
+                                "tipo": "foreignfield",
+                                "key": "costereal",
+                                "label": "costeReal"
+                            }
+                        ],
+                        "rowclick": "link",
+                        "accionesGrid": [
+                            {
+                                "key": "nuevaLinea",
+                                "label": "Nuevo",
+                                "success": [
+                                    {
+                                        "slot": "refrescar"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/layout",
+            "value": {
+                "acciones": {
+                    "cargaImagen": {
+                        "action": "goto",
+                        "prefix": "articulos",
+                        "serverAction": "dameCargaImagen"
+                    },
+                    "verImagen": {
+                        "action": "goto",
+                        "prefix": "articulos",
+                        "newtab": true,
+                        "serverAction": "dameUrlImagen"
+                    },
+                    "nuevaLinea": {
+                        "label": "Nuevo",
+                        "action": "newRow",
+                        "icon": "add_circle"
+                    }
+                }
+            }
+        }
+    ]
+}

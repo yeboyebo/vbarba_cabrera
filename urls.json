@@ -1,3 +1,93 @@
 {
-    "modifications": []
+    "modifications": [
+        {
+            "type": "insertAfterNode",
+            "path": "/almacen/root",
+            "value": {
+                "imagen": {
+                    "url": "imagen/(?P<param>(.*))",
+                    "func": "imagen"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/almacen/imagen",
+            "value": {
+                "uploadimage": {
+                    "url": "uploadimage/(?P<param>(.*))",
+                    "func": "uploadimage"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/facturacion/root",
+            "value": {
+                "imagencarro": {
+                    "url": "imagencarro/(?P<pedido>(.*))/(?P<carro>(.*))",
+                    "func": "imagencarro"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/facturacion/imagencarro",
+            "value": {
+                "uploadimagencarro": {
+                    "url": "uploadimagencarro/(?P<pedido>(.*))/(?P<carro>(.*))",
+                    "func": "uploadimagencarro"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactppal/zonasgeo",
+            "value": {
+                "historicos": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactalma/lineasregstocks",
+            "value": {
+                "vb_almacenesusu": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactalma/vb_almacenesusu",
+            "value": {
+                "vb_fincasusu": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactalma/vb_fincasusu",
+            "value": {
+                "vb_ubicaciones": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfacturac/agruparalbaranesprov",
+            "value": {
+                "lineascarro": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfacturac/lineascarro",
+            "value": {
+                "montadospedido": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfacturac/montadospedido",
+            "value": {
+                "lineascarrospisos": null
+            }
+        }
+    ]
 }

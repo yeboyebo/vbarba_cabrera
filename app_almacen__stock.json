@@ -1,0 +1,304 @@
+{
+    "querystring": {},
+    "schema": {
+        "stocks": {
+            "rel": "referencia",
+            "querystring": {"f_fincaUsuario": null}
+        }
+    },
+    "title": "STOCKS",
+    "focus": "fdb_codBarras",
+    "layout": {
+    	"labelFincaActual": {
+            "componente": "YBLabel",
+            "text": "Finca: %yb1",
+            "style": {
+                "fontSize": "12px",
+                "width": "100%",
+                "textAlign": "left"
+            },
+            "params": [
+                {"type": "calc", "key": "fincaActual"}
+            ]
+        },
+        "labelDetalle": {
+            "componente": "YBLabel",
+            "style": {
+                "fontSize": "18px",
+                "fontWeight": "bold",
+                "width": "100%",
+                "textAlign":"center"
+            },
+            "text": "%yb1 / %yb2 / %yb3 €",
+            "params": [
+                {"type": "model", "key": "referencia"},
+                {"type": "model", "key": "descripcion"},
+                {"type": "model", "key": "pvp"}
+            ]
+        },
+        "groupBoxAcciones": {
+            "componente": "YBGroupBox",
+            "className": "",
+            "style": {},
+            "layout": {
+                "editarButton": {
+                    "componente": "YBButton",
+                    "icon": "create",
+                    "className": "floatRight",
+                    "buttonType": "raised",
+                    "secondary": true,
+                    "primary": false,
+                    "action": {
+                        "key": "modificarArticulo",
+                        "success": []
+                    }
+                },
+                "disponibleButton": {
+                    "componente": "YBButton",
+                    "label": "Disponible",
+                    "className": "floatRight",
+                    "buttonType": "raised",
+                    "secondary": true,
+                    "primary": false,
+                    "prefix": "articulos",
+                    "action": {
+                        "key": "actualizarDisponible",
+                        "success": [{"slot": "refrescar", "custom": "stock"}]
+                    }
+                }
+            }
+        },
+        "groupBoxAccionesImagen": {
+            "componente": "YBGroupBox",
+            "className": "",
+            "style": {},
+            "layout": {
+                "cargaImagen": {
+                    "componente": "YBButton",
+                    "prefix": "articulos",
+                    "icon": "camera_alt",
+                    "className": "floatRight",
+                    "buttonType": "raised",
+                    "secondary": true,
+                    "primary": false,
+                    "action": {
+                        "key": "cargaImagen",
+                        "success": []
+                    }
+                },
+                "verImagen": {
+                    "componente": "YBButton",
+                    "prefix": "articulos",
+                    "icon": "photo",
+                    "className": "floatRight",
+                    "buttonType": "raised",
+                    "secondary": true,
+                    "primary": false,
+                    "action": {
+                        "key": "verImagen",
+                        "success": []
+                    }
+                }
+            }
+        },
+        "totalStockFinca": {
+            "componente": "YBLabel",
+            "text": "Total Stock: %yb1",
+            "style": {
+                "fontSize": "16px",
+                "fontWeight": "400",
+                "width": "33%",
+                "position": "relative",
+                "float": "left"
+            },
+            "params": [{"type": "calc", "key": "totalStockFinca"}]
+        },
+        "disponibleArtProv": {
+            "componente": "YBLabel",
+            "text": "Disponible: %yb1",
+            "style": {
+                "fontSize": "16px",
+                "fontWeight": "400",
+                "width": "33%",
+                "position": "relative",
+                "float": "left"
+            },
+            "params": [{"type": "calc", "key": "disponibleProv"}]
+        },
+        "tieneFoto": {
+            "componente": "YBLabel",
+            "text": "Foto: %yb1",
+            "style": {
+                "fontSize": "16px",
+                "fontWeight": "400",
+                "width": "33%",
+                "position": "relative",
+                "float": "left"
+            },
+            "params": [{"type": "calc", "key": "tieneFoto"}]
+        },
+        "stocksAlmacenes": {
+            "componente": "YBLabel",
+            "text": "%yb1",
+            "visible": false,
+            "params": [{"type": "calc", "key": "stocksAlmacenes"}]
+        },
+        "stocksGrid": {
+            "label": "Stocks",
+            "componente": "YBTable",
+            "class": "claseGrid",
+            "prefix": "stocks",
+            "paginacion": false,
+            "filter": false,
+            "columns": [
+                {
+                    "tipo": "field",
+                    "key": "nombreAlmacen",
+                    "label": "Almacén",
+                    "width": 130
+                },
+                {
+                    "tipo": "field",
+                    "key": "cantidad",
+                    "width": 80,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "nuevaLineaRegStock",
+                        "success": [
+                            {"slot": "refrescar", "custom": "stock"}
+                        ]
+                    }
+                },
+                {
+                    "tipo": "field",
+                    "key": "sumacantidad",
+                    "label": "Suma",
+                    "width": 80,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "sumaCantidadLineaRegStock",
+                        "success": [
+                            {"slot": "refrescar", "custom": "stock"}
+                        ]
+                    }
+                },
+                {
+                    "tipo": "field",
+                    "key": "detalleubicacion",
+                    "label": "Detalle",
+                    "width": 200,
+                    "editable": true,
+                    "type": "string",
+                    "act": {
+                        "key": "cambiarDetalleUbicacion",
+                        "success": [
+                            {"slot": "refrescar", "custom": "stock"}
+                        ]
+                    }
+                }
+            ],
+            "rowclick": "",
+            "accionesGrid": [{
+                "key": "nuevaLinea",
+                "label": "Nuevo",
+                "success": [{ "slot": "refrescar"}]
+            }]
+        },
+        "groupBoxVolver": {
+            "componente": "YBGroupBox",
+            "className": "actionGB",
+            "layout": {
+                "volverButton": {
+                    "componente": "YBButton",
+                    "label": "Volver",
+                    "className": "floatRight",
+                    "buttonType": "raised",
+                    "action": {
+                        "key": "volverMaster",
+                        "success": []
+                    }
+                }
+            }
+        }
+    },
+    "acciones": {
+        "cargaImagen": {
+            "action": "goto",
+            "prefix": "articulos",
+            "serverAction": "dameCargaImagen"
+        },
+    	"volverMaster": {
+    		"action": "return"
+    	},
+        "nuevaLineaRegStock": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "nuevaLineaRegStock",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "cantidad",
+                    "key": "cantidad",
+                    "validaciones": null
+                }
+            ]
+        },
+        "sumaCantidadLineaRegStock": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "sumaCantidadLineaRegStock",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "sumacantidad",
+                    "key": "sumacantidad",
+                    "validaciones": null
+                }
+            ]
+        },
+        "verImagen": {
+            "action": "goto",
+            "prefix": "articulos",
+            "newtab": true,
+            "serverAction": "dameUrlImagen"
+        },
+        "nuevaLinea": {
+            "label": "Nuevo",
+            "action": "newRow",
+            "icon": "add_circle"
+        },
+        "modificarArticulo": {
+            "label": "ModArticulo",
+            "action": "link",
+            "template": "articulos",
+            "rel": "referencia",
+            "icon": "create"
+        },
+        "cambiarUbicacion": {
+            "label": "Cambiar ubicacion",
+            "action": "legacy",
+            "icon": "payment",
+            "serverAction": "cambiarUbicacion"
+        },
+        "cambiarDetalleUbicacion": {
+            "label": "Cambiar ubicacion",
+            "action": "legacy",
+            "icon": "payment",
+            "serverAction": "cambiarDetalleUbicacion",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "detalleubicacion",
+                    "key": "detalleubicacion",
+                    "validaciones": null
+                }
+            ]
+        },
+        "actualizarDisponible": {
+            "action": "legacy",
+            "serverAction": "actualizarDisponible"
+        }
+    }
+}

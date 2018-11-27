@@ -1,0 +1,77 @@
+{
+    "modifications": [
+        {
+            "type": "insertAfterNode",
+            "path": "/root",
+            "value": {
+                "querystring": {
+                    "p_l": 50,
+                    "p_c": true,
+                    "o_1": "-fecha",
+                    "o_2": "-codigo"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/querystring",
+            "value": {
+                "schema": {}
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/schema",
+            "value": {
+                "layout": {
+                    "masterPedidoscli": {
+                        "componente": "YBGrid",
+                        "label": "Pedidos de venta",
+                        "prefix": "pedidoscli",
+                        "filter": "buscador",
+                        "columns": [
+                            {
+                                "tipo": "field",
+                                "listpos": "title",
+                                "key": "codigo"
+                            },
+                            {
+                                "tipo": "field",
+                                "listpos": "body",
+                                "key": "fecha"
+                            },
+                            {
+                                "tipo": "field",
+                                "listpos": "subtitle",
+                                "key": "nombrecliente"
+                            },
+                            {
+                                "tipo": "field",
+                                "listpos": "secondaryitem",
+                                "key": "total"
+                            }
+                        ],
+                        "rowclick": "link"
+                    },
+                    "newRecordTelest": {
+                        "componente": "YBNewRecord",
+                        "class": "info",
+                        "icon": "add"
+                    }
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/layout",
+            "value": {
+                "acciones": {
+                    "delete": {
+                        "action": "deleteRow",
+                        "icon": "delete"
+                    }
+                }
+            }
+        }
+    ]
+}

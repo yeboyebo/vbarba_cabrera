@@ -1,7 +1,116 @@
 {
     "name": "vbarba_cabrera_2",
     "modifications": {
-        "addFile": [],
+        "addFile": [
+            {
+                "path": "apps/facturacion/templates/facturacion/",
+                "name": "app_facturacion__uploadimagencarro.html"
+            },
+            {
+                "path": "apps/facturacion/templates/facturacion/plantillas/",
+                "name": "app_facturacion__editarcarrospisos.json"
+            },
+            {
+                "path": "apps/facturacion/templates/facturacion/plantillas/",
+                "name": "app_facturacion__carros.json"
+            },
+            {
+                "path": "apps/facturacion/templates/facturacion/plantillas/",
+                "name": "app_facturacion__carrospisos.json"
+            },
+            {
+                "path": "apps/facturacion/templates/facturacion/plantillas/",
+                "name": "app_facturacion__mastercarros.json"
+            },
+            {
+                "path": "apps/portal/templates/portal/",
+                "name": "app_portal__login.html"
+            },
+            {
+                "path": "apps/portal/templates/portal/",
+                "name": "app_portal__index.html"
+            },
+            {
+                "path": "apps/almacen/templates/almacen/",
+                "name": "app_almacen__uploadimage.html"
+            },
+            {
+                "path": "apps/almacen/templates/almacen/plantillas/",
+                "name": "app_almacen__stocksFinca.json"
+            },
+            {
+                "path": "apps/almacen/templates/almacen/plantillas/",
+                "name": "app_almacen__stock.json"
+            },
+            {
+                "path": "apps/almacen/templates/almacen/plantillas/",
+                "name": "app_almacen__inventariosAlmacen.json"
+            },
+            {
+                "path": "apps/almacen/templates/almacen/plantillas/",
+                "name": "app_almacen__fincasusu.json"
+            },
+            {
+                "path": "apps/almacen/templates/almacen/plantillas/",
+                "name": "app_almacen__articulosStock.json"
+            },
+            {
+                "path": "models/flfactppal/",
+                "name": "model_flfactppal__historicos.py"
+            },
+            {
+                "path": "models/flfactppal/",
+                "name": "model_flfactppal__historicos_def.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__vb_almacenesusu.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__vb_almacenesusu_def.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__vb_fincasusu.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__vb_fincasusu_def.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__vb_ubicaciones.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__vb_ubicaciones_def.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__lineascarro.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__lineascarro_def.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__montadospedido.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__montadospedido_def.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__lineascarrospisos.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__lineascarrospisos_def.py"
+            }
+        ],
         "replaceFile": [
             {
                 "name": "dependencias.json",
@@ -16,9 +125,182 @@
             {
                 "name": "registros.json",
                 "path": "config/"
+            },
+            {
+                "path": "apps/facturacion/templates/facturacion/",
+                "name": "app_facturacion__menu_facturacion.json"
+            },
+            {
+                "path": "apps/facturacion/templates/facturacion/plantillas/",
+                "name": "app_facturacion__pedidoscli.json"
+            },
+            {
+                "path": "apps/facturacion/templates/facturacion/plantillas/",
+                "name": "app_facturacion__lineaspedidoscli.json"
+            },
+            {
+                "path": "apps/facturacion/templates/facturacion/plantillas/",
+                "name": "app_facturacion__newrecordpedidoscli.json"
+            },
+            {
+                "path": "apps/facturacion/templates/facturacion/plantillas/",
+                "name": "app_facturacion__newrecordlineaspedidoscli.json"
+            },
+            {
+                "path": "apps/facturacion/templates/facturacion/plantillas/",
+                "name": "app_facturacion__masterpedidoscli.json"
+            },
+            {
+                "path": "apps/portal/templates/portal/",
+                "name": "app_portal__menu_portal.json"
+            },
+            {
+                "path": "apps/almacen/templates/almacen/",
+                "name": "app_almacen__menu_almacen.json"
+            },
+            {
+                "path": "apps/almacen/templates/almacen/plantillas/",
+                "name": "app_almacen__newrecordarticulosprov.json"
+            },
+            {
+                "path": "apps/almacen/templates/almacen/plantillas/",
+                "name": "app_almacen__newrecordstocks.json"
+            },
+            {
+                "path": "apps/almacen/templates/almacen/plantillas/",
+                "name": "app_almacen__stocks.json"
+            },
+            {
+                "path": "apps/almacen/templates/almacen/plantillas/",
+                "name": "app_almacen__masterarticulos.json"
+            },
+            {
+                "path": "apps/almacen/templates/almacen/plantillas/",
+                "name": "app_almacen__articulos.json"
+            },
+            {
+                "path": "apps/almacen/templates/almacen/plantillas/",
+                "name": "app_almacen__articulosprov.json"
             }
         ],
-        "patchScript": [],
+        "patchScript": [
+            {
+                "path": "apps/facturacion/viewset/",
+                "name": "app_facturacion__views_facturacion.py"
+            },
+            {
+                "path": "apps/portal/viewset/",
+                "name": "app_portal__views_portal.py"
+            },
+            {
+                "path": "apps/almacen/viewset/",
+                "name": "app_almacen__views_almacen.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__articulos_def.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__inventarios.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__inventarios_def.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__articulos.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__almacenes_def.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__lineasregstocks.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__stocks.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__almacenes.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__stocks_def.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__lineasregstocks_def.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__flfactalma_def.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__lineaspedidoscli.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__lineaspedidoscli_def.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__pedidoscli_def.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__flfacturac_def.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__pedidoscli.py"
+            },
+            {
+                "path": "models/flfactppal/",
+                "name": "model_flfactppal__formaspago.py"
+            },
+            {
+                "path": "models/flfactppal/",
+                "name": "model_flfactppal__divisas.py"
+            },
+            {
+                "path": "models/flfactppal/",
+                "name": "model_flfactppal__divisas_def.py"
+            },
+            {
+                "path": "models/flfactppal/",
+                "name": "model_flfactppal__clientes_def.py"
+            },
+            {
+                "path": "models/flfactppal/",
+                "name": "model_flfactppal__clientes.py"
+            },
+            {
+                "path": "models/flfactppal/",
+                "name": "model_flfactppal__agentes_def.py"
+            },
+            {
+                "path": "models/flfactppal/",
+                "name": "model_flfactppal__formaspago_def.py"
+            },
+            {
+                "path": "models/flfactppal/",
+                "name": "model_flfactppal__agentes.py"
+            },
+            {
+                "path": "models/flfactppal/",
+                "name": "model_flfactppal__proveedores_def.py"
+            },
+            {
+                "path": "models/flfactppal/",
+                "name": "model_flfactppal__proveedores.py"
+            }
+        ],
         "deleteFile": []
     }
 }

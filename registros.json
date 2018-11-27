@@ -1,3 +1,70 @@
 {
-    "modifications": []
+    "modifications": [
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactppal/usuarios",
+            "value": {
+                "flsettings": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactppal/flsettings",
+            "value": {
+                "historicos": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactalma/regstocks",
+            "value": {
+                "vb_almacenesusu": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactalma/vb_almacenesusu",
+            "value": {
+                "vb_fincasusu": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactalma/vb_fincasusu",
+            "value": {
+                "stocks": {
+                    "formRecord": "regstocks",
+                    "form": "masterregstocks"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactalma/stocks",
+            "value": {
+                "vb_fincas": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactalma/vb_fincas",
+            "value": {
+                "movistock": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactalma/movistock",
+            "value": {
+                "vb_ubicaciones": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfacturac/agruparalbaranesprov",
+            "value": {
+                "lineascarro": null
+            }
+        }
+    ]
 }

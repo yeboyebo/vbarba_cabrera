@@ -1,0 +1,33 @@
+{
+    "modifications": [
+        {
+            "type": "insertAfterNode",
+            "path": "/root",
+            "value": {
+                "items": [
+                    {
+                        "NAME": "stocks",
+                        "TEXT": "STOCKS",
+                        "URL": "almacen/articulos/custom/articulosStock",
+                        "ICON": "content_paste",
+                        "COLOR": "rgb(30, 170, 30)"
+                    },
+                    {
+                        "NAME": "Articulos",
+                        "TEXT": "ARTÍCULOS",
+                        "URL": "almacen/articulos/master",
+                        "ICON": "shopping_cart",
+                        "COLOR": "rgb(240, 120, 20)"
+                    },
+                    {
+                        "NAME": "Cambiar Finca",
+                        "TEXT": "CAMBIAR FINCA",
+                        "URL": "almacen/vb_fincasusu/custom/fincasusu",
+                        "ICON": "cached",
+                        "COLOR": "rgb(30, 30, 150)"
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "querystring": {
+        "p_l": 30,
+        "p_c": true,
+        "s_servido__in":["No", "Parcial"],
+        "o_2": "-codigo",
+        "o_1": "-fecha"
+    },
+    "schema": {},
+    "layout": {
+        "masterTelarcGrid": {
+            "componente": "YBTable",
+            "class": "claseGrid",
+            "label": "Pedidos de Clientes",
+            "prefix": "pedidoscli",
+            "colorRowField": "rowColor",
+            "filter": "buscador",
+            "paginacion": true,
+            "columns": [
+                {"tipo": "field", "listpos": "title", "key": "codigo", "width": 110, "flex": 2},
+                {"tipo": "field", "listpos": "body", "key": "nombrecliente", "width": 210, "flex": 4},
+                {"tipo": "field", "listpos": "subtitle", "key": "fecha", "width": 110, "flex": 2},
+                {"tipo": "field", "listpos": "body", "key": "observaciones", "width": 210, "flex": 6},
+                {"tipo": "field", "listpos": "body", "key": "montado", "width": 20}
+            ],
+            "rowclick": "dameTemplateCarros"
+        }
+    },
+    "acciones": {
+        "dameTemplateCarros": {
+            "action": "goto",
+            "serverAction": "dameTemplateCarros"
+        }
+    }
+}

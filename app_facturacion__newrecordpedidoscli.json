@@ -1,0 +1,72 @@
+{
+    "modifications": [
+        {
+            "type": "insertAfterNode",
+            "path": "/root",
+            "value": {
+                "querystring": {}
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/querystring",
+            "value": {
+                "schema": {}
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/schema",
+            "value": {
+                "layout": {
+                    "newRecordPedidoscli": {
+                        "prefix": "pedidoscli",
+                        "componente": "YBForm",
+                        "class": "claseGrid",
+                        "submit": "create",
+                        "success": [
+                            {
+                                "slot": "redirect"
+                            }
+                        ],
+                        "groupbox": "acordeon",
+                        "return": true,
+                        "fields": {
+                            "gb__datosGenerales": {
+                                "title": "Datos generales",
+                                "fields": {
+                                    "codigo": {
+                                        "disabled": true
+                                    },
+                                    "codejercicio": {
+                                        "disabled": true
+                                    },
+                                    "codserie": {
+                                        "disabled": true
+                                    },
+                                    "codcliente": {
+                                        "rel": "clientes",
+                                        "key": "codcliente",
+                                        "desc": "nombre",
+                                        "function": "getCliente",
+                                        "showpk": false
+                                    },
+                                    "direccion": {},
+                                    "nombrecliente": {}
+                                }
+                            }
+                        },
+                        "exclude": {}
+                    }
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/layout",
+            "value": {
+                "acciones": {}
+            }
+        }
+    ]
+}

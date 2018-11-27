@@ -1,0 +1,102 @@
+{
+    "initValidation": {
+        "error": {
+            "aplic": "almacen",
+            "prefix": "vb_fincasusu",
+            "template": "fincasusu",
+            "msg": "Debes seleccionar una finca local"
+        }
+    },
+    "querystring": {
+        "p_l": 50,
+        "p_c": true,
+        "o_1": "referencia",
+        "s_obsoleto__exact": false
+    },
+    "schema": {
+        "articulos" : {
+            "querystring": {
+                "p_l": 50,
+                "p_c": true,
+                "o_1": "referencia",
+                "s_obsoleto__exact": false
+            }
+        }
+    },
+    "focus": "fdb_codBarras",
+    "layout": {
+    	"labelFincaActual": {
+            "componente": "YBLabel",
+            "text": "Finca: %yb1",
+            "style": {
+                "fontSize": "12px",
+                "width": "100%",
+                "textAlign": "right"
+            },
+            "params": [
+                {"type": "calc", "key": "fincaActual"}
+            ]
+        },
+    	"fdb_codBarras": {
+            "componente": "YBFieldDB",
+            "prefix": "otros",
+            "aplic": "almacen",
+            "key": "referencia",
+            "desc": "descripcion",
+            "auto_name": "Lectura",
+            "auto_field": "descripcion",
+            "disabled_field": "referencia",
+            "function": "getCodBarrasProv",
+            "firstOnEnter": false,
+            "tipo": "55",
+            "rel": "articulos",
+            "className": "relatedField",
+            "showpk":false,
+            "filtro": {
+                "s_obsoleto__exact": false
+            },
+            "actions": [{
+                "signal": "enterPressed",
+                "key": "filtraTablaArticulos",
+                "success": []
+            }]
+        },
+        "articulosGrid": {
+            "componente": "YBTable",
+            "class": "claseGrid",
+            "prefix": "articulos" ,
+            "filter": false,
+            "colorRowField": "rowColor",
+            "paginacion": false,
+            "columns": [
+                {"tipo": "field", "key": "referencia", "pk": "true", "width": 100},
+                {"tipo": "field", "key": "descripcion", "width": 300},
+                {"tipo": "field", "key": "pvp", "width": 50},
+                {"tipo": "foreignfield", "key": "artdisponible", "width": 50, "label": "Disponible"},
+                {
+                    "tipo": "act",
+                    "key": "actualizarDisponible",
+                    "label": "Actualizar Disponible",
+                    "success": [{"slot": "refrescar", "custom":"articulosStock", "filter": true}]
+                }
+            ],
+            "rowclick": "dameTemplateStock"
+        }
+    },
+    "acciones": {
+        "dameTemplateStock": {
+            "action": "goto",
+            "serverAction": "dameTemplateStock"
+        },
+        "filtraTablaArticulos": {
+            "action": "gridFilter",
+            "prefix": "articulos",
+            "layout": "articulosGrid"
+        },
+        "actualizarDisponible": {
+            "action": "legacy",
+            "icon": "payment",
+            "serverAction": "actualizarDisponible"
+        }
+    }
+}

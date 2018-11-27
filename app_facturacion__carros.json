@@ -1,0 +1,793 @@
+{
+    "initValidation": {},
+    "querystring": {},
+    "schema": {
+        "lineaspedidoscli": {
+            "rel": "idpedido",
+            "querystring": {}
+        },
+        "articulosporcarro": {
+            "query": {}
+        }
+    },
+    "layout": {
+        "groupBoxCargaImagen": {
+            "componente": "YBGroupBox",
+            "className": "",
+            "layout": {
+                "cargaImagenCarro": {
+                    "componente": "YBButton",
+                    "prefix": "pedidoscli",
+                    "icon": "camera_alt",
+                    "className": "floatRight",
+                    "buttonType": "raised",
+                    "action": {
+                        "key": "cargaImagenCarro",
+                        "success": []
+                    }
+                },
+                "nuevoPedido": {
+                    "componente": "YBButton",
+                    "prefix": "pedidoscli",
+                    "label": "Nuevo Montado",
+                    "className": "floatRight",
+                    "buttonType": "raised",
+                    "primary": false,
+                    "secondary": true,
+                    "action": {
+                        "key": "nuevoPedidoParcial",
+                        "success": [{"slot": "refrescar", "custom": "carros"}]
+                    }
+                }
+            }
+        },
+        "groupBoxLayout": {
+            "componente": "YBGroupBox",
+            "className": "actionGB",
+            "style": {
+                "float": "left",
+                "overflow": "hidden"
+            },
+            "layout": {
+                "labelDescripcion2": {
+                    "componente": "YBLabel",
+                    "text": "%yb1 - %yb2",
+                    "style": {
+                        "fontSize": "20px",
+                        "fontWeight": "bold",
+                        "width": "100%",
+                        "textAlign": "left"
+                    },
+                    "params": [
+                        {"type": "model", "key": "codigo"},
+                        {"type": "model", "key": "nombrecliente"}
+                    ]
+                },
+                "labelDescripcion3": {
+                    "componente": "YBLabel",
+                    "text": "%yb1",
+                    "style": {
+                        "fontSize": "20px",
+                        "fontWeight": "bold",
+                        "width": "100%",
+                        "textAlign": "left"
+                    },
+                    "params": [
+                        {"type": "model", "key": "fecha"}
+                    ]
+                }
+            }
+        },
+        "groupBoxAcciones": {
+            "componente": "YBGroupBox",
+            "className": "actionGB",
+            "style": {
+                "float": "right",
+                "overflow": "hidden"
+            },
+            "layout": {
+                "groupBoxCarros": {
+                    "componente": "YBGroupBox",
+                    "className": "actionGB",
+                    "style": {
+                        "marginTop": "5px"
+                    },
+                    "layout": {
+                        "groupBoxDescCarro": {
+                            "componente": "YBGroupBox",
+                            "className": "actionGB",
+                            "style": {
+                                "marginTop": "5px"
+                            },
+                            "layout": {
+                                "labelCarro": {
+                                    "componente": "YBLabel",
+                                    "text": "Carro",
+                                    "style": {
+                                        "fontSize": "15px",
+                                        "fontWeight": "bold",
+                                        "width": "100%",
+                                        "textAlign": "center"
+                                    }
+                                }
+                            }
+                        },
+                        "csiguiente": {
+                            "componente": "YBButton",
+                            "prefix": "articulos",
+                            "icon": "keyboard_arrow_right",
+                            "className": "floatRight",
+                            "buttonType": "raised",
+                            "style":{
+                                "minWidth": "40px"
+                            },
+                            "action": {
+                                "key": "siguienteCarro",
+                                "success": [
+                                    {
+                                        "slot": "onfilter",
+                                        "prefix": "articulosporcarro",
+                                        "type": "query",
+                                        "filter": {
+                                            "lineascarro.numcarro": "numcarro"
+                                        }
+                                    }
+                                ]
+                            }
+
+                        },
+                        "labelTotalCarros": {
+                            "componente": "YBLabel",
+                            "text": " / %yb1",
+                            "style": {
+                                "fontSize": "15px",
+                                "marginLeft": "-3px",
+                                "minWidth": "15px",
+                                "bottom": "10px",
+                                "float": "right"
+                            },
+                            "params": [{"type": "model", "key": "numcarros"}]
+                        },
+                        "labelNumCarro": {
+                            "componente": "YBLabel",
+                            "text": "%yb1",
+                            "style": {
+                                "fontSize": "15px",
+                                "marginLeft": "15px",
+                                "minWidth": "15px",
+                                "bottom": "10px",
+                                "float": "right"
+                            },
+                            "params": [{"type": "calc", "key": "numCarro"}]
+                        },
+                        "canterior": {
+                            "componente": "YBButton",
+                            "prefix": "articulos",
+                            "icon": "keyboard_arrow_left",
+                            "className": "floatRight",
+                            "buttonType": "raised",
+                            "style":{
+                                "minWidth": "40px"
+                            },
+                            "action": {
+                                "key": "anteriorCarro",
+                                "success": [
+                                    {
+                                        "slot": "onfilter",
+                                        "prefix": "articulosporcarro",
+                                        "type": "query",
+                                        "filter": {
+                                            "lineascarro.numcarro": "numcarro"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "groupBoxInfo": {
+            "componente": "YBGroupBox",
+            "className": "",
+            "style": {},
+            "layout": {
+                "nuevoCarro": {
+                    "componente": "YBButton",
+                    "prefix": "pedidoscli",
+                    "icon": "add_shopping_cart",
+                    "className": "floatLeft",
+                    "buttonType": "raised",
+                    "style":{
+                        "minWidth": "40px"
+                    },
+                    "action": {
+                        "key": "nuevoCarro",
+                        "success": [
+                            {
+                                "slot": "refrescar", "custom": "carros"
+                            }
+                        ]
+                    }
+
+                },
+                "nuevoPiso": {
+                    "componente": "YBButton",
+                    "prefix": "pedidoscli",
+                    "icon": "playlist_add",
+                    "className": "floatLeft",
+                    "buttonType": "raised",
+                    "style":{
+                        "minWidth": "40px"
+                    },
+                    "action": {
+                        "key": "nuevoPiso",
+                        "success": [
+                            {
+                                "slot": "refrescar", "custom": "carros"
+                            }
+                        ]
+                    }
+
+                },
+               "labelDetalle": {
+                    "componente": "YBLabel",
+                    "style": {
+                        "fontSize": "18px",
+                        "fontWeight": "bold",
+                        "width": "70%",
+                        "textAlign":"center"
+                    },
+                    "text": "Montado %yb1",
+                    "params": [
+                        {"type": "model", "key": "montado"}
+                    ]
+                }
+            }
+        },
+        "queryGrid_articulosporcarro": {
+            "componente": "YBTable",
+            "label": "",
+            "prefix": "articulosporcarro",
+            "colorRowField": "rowColor",
+            "type": "query",
+            "columns": [
+                {"tipo": "field", "key": "lineaspedidoscli.referencia", "label": "Referencia", "width": 100, "flex": 2},
+                {"tipo": "field", "key": "lineaspedidoscli.aliasprov", "label": "Prov.", "width": 100, "flex": 2},
+                {"tipo": "field", "key": "lineaspedidoscli.descripcion", "label": "Descripción","width": 200, "flex": 5},
+                {"tipo": "field", "key": "lineaspedidoscli.cantidad", "width": 60},
+                {"tipo": "field", "key": "lineaspedidoscli.cantmontada", "label": "Montada", "width": 60},
+                {
+                    "tipo": "foreignfield",
+                    "key": "lineascarro.cantpiso1",
+                    "label": "P1",
+                    "width": 45,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "editarCantPiso1",
+                        "success": [
+                            {"slot": "refrescar", "custom": "carros"}
+                        ]
+                    }, "flex": 1
+                },
+                {
+                    "tipo": "foreignfield",
+                    "key": "lineascarro.cantpiso2",
+                    "label": "P2",
+                    "width": 45,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "editarCantPiso2",
+                        "success": [
+                            {"slot": "refrescar", "custom": "carros"}
+                        ]
+                    }, "flex": 1
+                },
+                {
+                    "tipo": "foreignfield",
+                    "key": "lineascarro.cantpiso3",
+                    "label": "P3",
+                    "width": 45,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "editarCantPiso3",
+                        "success": [
+                            {"slot": "refrescar", "custom": "carros"}
+                        ]
+                    }, "flex": 1
+                },
+                {
+                    "tipo": "foreignfield",
+                    "key": "lineascarro.cantpiso4",
+                    "label": "P4",
+                    "width": 45,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "editarCantPiso4",
+                        "success": [
+                            {"slot": "refrescar", "custom": "carros"}
+                        ]
+                    }, "flex": 1
+                },
+                {
+                    "tipo": "foreignfield",
+                    "key": "lineascarro.cantpiso5",
+                    "label": "P5",
+                    "width": 45,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "editarCantPiso5",
+                        "success": [
+                            {"slot": "refrescar", "custom": "carros"}
+                        ]
+                    }, "flex": 1
+                },
+                {
+                    "tipo": "foreignfield",
+                    "key": "lineascarro.cantpiso6",
+                    "label": "P6",
+                    "width": 45,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "editarCantPiso6",
+                        "success": [
+                            {"slot": "refrescar", "custom": "carros"}
+                        ]
+                    }, "flex": 1
+                },
+                {
+                    "tipo": "foreignfield",
+                    "key": "lineascarro.cantpiso7",
+                    "label": "P7",
+                    "width": 45,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "editarCantPiso7",
+                        "success": [
+                            {"slot": "refrescar", "custom": "carros"}
+                        ]
+                    }, "flex": 1
+                },
+                {
+                    "tipo": "foreignfield",
+                    "key": "lineascarro.cantpiso8",
+                    "label": "P8",
+                    "width": 45,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "editarCantPiso8",
+                        "success": [
+                            {"slot": "refrescar", "custom": "carros"}
+                        ]
+                    }, "flex": 1
+                },
+                {
+                    "tipo": "foreignfield",
+                    "key": "lineascarro.cantpiso9",
+                    "label": "P9",
+                    "width": 45,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "editarCantPiso9",
+                        "success": [
+                            {"slot": "refrescar", "custom": "carros"}
+                        ]
+                    }, "flex": 1
+                },
+                {
+                    "tipo": "foreignfield",
+                    "key": "lineascarro.cantpiso10",
+                    "label": "P10",
+                    "width": 45,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "editarCantPiso10",
+                        "success": [
+                            {"slot": "refrescar", "custom": "carros"}
+                        ]
+                    }, "flex": 1
+                },
+                {
+                    "tipo": "foreignfield",
+                    "key": "lineascarro.cantpiso11",
+                    "label": "P11",
+                    "width": 45,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "editarCantPiso11",
+                        "success": [
+                            {"slot": "refrescar", "custom": "carros"}
+                        ]
+                    }, "flex": 1
+                },
+                {
+                    "tipo": "foreignfield",
+                    "key": "lineascarro.cantpiso12",
+                    "label": "P12",
+                    "width": 45,
+                    "editable": true,
+                    "type": "number",
+                    "act": {
+                        "key": "editarCantPiso12",
+                        "success": [
+                            {"slot": "refrescar", "custom": "carros"}
+                        ]
+                    }, "flex": 1
+                }
+            ],
+            "rowclick": ""
+        },
+        "groupBoxVolver": {
+            "componente": "YBGroupBox",
+            "className": "actionGB",
+            "layout": {
+                "volverButton": {
+                    "componente": "YBButton",
+                    "label": "Volver",
+                    "className": "floatRight",
+                    "buttonType": "raised",
+                    "action": {
+                        "key": "volverMaster",
+                        "success": []
+                    }
+                },
+                "eliminarcarroButton": {
+                    "componente": "YBButton",
+                    "label": "EliminarCarro",
+                    "className": "floatRight",
+                    "buttonType": "raised",
+                    "action": {
+                        "key": "eliminarCarroActual",
+                        "prefix": "pedidoscli",
+                        "success": [{"slot": "refrescar", "custom": "carros"}]
+                    }
+                }
+            }
+        },
+        "pedidoscliForm": {
+            "prefix": "pedidoscli",
+            "visible": false,
+            "componente": "YBForm",
+            "class": "claseGrid",
+            "submit": "update",
+            "success": [{"slot": "refrescar", "custom": "carros"}],
+            "groupbox": "",
+            "fields": {
+                "gb__": {
+                    "fields": {
+                        "observaciones": {}
+                    }
+                }
+            },
+            "exclude": {}
+        },
+        "groupBoxVolver": {
+            "componente": "YBGroupBox",
+            "className": "gbform",
+            "layout": {
+                "field_observaciones": {
+                    "componente": "YBFieldDB",
+                    "prefix": "pedidoscli",
+                    "className": "",
+                    "key": "observaciones",
+                    "label": "observaciones",
+                    "tipo": 6,
+                    "style": {
+                        "width": "300px"
+                    },
+                    "actions": [{
+                        "signal": "enterPressed",
+                        "key": "actObservacionesPedido"
+                    }]
+                }
+            }
+        }
+    },
+    "acciones": {
+        "actObservacionesPedido": {
+            "label": "Lineas albaran",
+            "action": "legacy",
+            "icon": "payment",
+            "serverAction": "actObservacionesPedido",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "observaciones",
+                    "key": "observaciones",
+                    "validaciones": null
+                }
+            ]
+        },
+        "eliminarCarroActual": {
+            "action": "confirmAction",
+            "type": "legacy",
+            "msg": "¿Estás seguro de eliminar el último carro con todo su montado?",
+            "prefix": "pedidoscli",
+            "icon": "add_circle",
+            "serverAction": "eliminarCarroActual",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "Carro",
+                    "key": "numcarro",
+                    "validaciones": null
+                }
+            ]
+        },
+        "cargaImagenCarro": {
+            "action": "goto",
+            "newtab": true,
+            "prefix": "pedidoscli",
+            "serverAction": "dameCargaImagenCarro",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "Carro",
+                    "key": "numcarro",
+                    "validaciones": null
+                }
+            ]
+        },
+        "nuevoPedidoParcial": {
+            "action": "confirmAction",
+            "type": "legacy",
+            "msg": "¿Estás seguro de iniciar un nuevo montado para este pedido?",
+            "prefix": "pedidoscli",
+            "icon": "add_circle",
+            "serverAction": "nuevoPedidoParcial"
+        },
+        "editarCantPiso1": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "editarCantPiso",
+            "prefix": "lineascarro",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "Piso1",
+                    "key": "lineascarro.cantpiso1",
+                    "validaciones": null,
+                    "null": true
+                }
+            ]
+        },
+        "editarCantPiso2": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "editarCantPiso",
+            "prefix": "lineascarro",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "Piso2",
+                    "key": "lineascarro.cantpiso2",
+                    "validaciones": null,
+                    "null": true
+                }
+            ]
+        },
+        "editarCantPiso3": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "editarCantPiso",
+            "prefix": "lineascarro",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "Piso3",
+                    "key": "lineascarro.cantpiso3",
+                    "validaciones": null,
+                    "null": true
+                }
+            ]
+        },
+        "editarCantPiso4": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "editarCantPiso",
+            "prefix": "lineascarro",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "Piso4",
+                    "key": "lineascarro.cantpiso4",
+                    "validaciones": null,
+                    "null": true
+                }
+            ]
+        },
+        "editarCantPiso5": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "editarCantPiso",
+            "prefix": "lineascarro",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "Piso5",
+                    "key": "lineascarro.cantpiso5",
+                    "validaciones": null,
+                    "null": true
+                }
+            ]
+        },
+        "editarCantPiso6": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "editarCantPiso",
+            "prefix": "lineascarro",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "Piso6",
+                    "key": "lineascarro.cantpiso6",
+                    "validaciones": null,
+                    "null": true
+                }
+            ]
+        },
+        "editarCantPiso7": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "editarCantPiso",
+            "prefix": "lineascarro",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "Piso7",
+                    "key": "lineascarro.cantpiso7",
+                    "validaciones": null,
+                    "null": true
+                }
+            ]
+        },
+        "editarCantPiso8": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "editarCantPiso",
+            "prefix": "lineascarro",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "Piso8",
+                    "key": "lineascarro.cantpiso8",
+                    "validaciones": null,
+                    "null": true
+                }
+            ]
+        },
+        "editarCantPiso9": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "editarCantPiso",
+            "prefix": "lineascarro",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "Piso9",
+                    "key": "lineascarro.cantpiso9",
+                    "validaciones": null,
+                    "null": true
+                }
+            ]
+        },
+        "editarCantPiso10": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "editarCantPiso",
+            "prefix": "lineascarro",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "Piso10",
+                    "key": "lineascarro.cantpiso10",
+                    "validaciones": null,
+                    "null": true
+                }
+            ]
+        },
+        "editarCantPiso11": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "editarCantPiso",
+            "prefix": "lineascarro",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "Piso11",
+                    "key": "lineascarro.cantpiso11",
+                    "validaciones": null,
+                    "null": true
+                }
+            ]
+        },
+        "editarCantPiso12": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "editarCantPiso",
+            "prefix": "lineascarro",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "Piso12",
+                    "key": "lineascarro.cantpiso12",
+                    "validaciones": null,
+                    "null": true
+                }
+            ]
+        },
+        "nuevoCarro": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "nuevoCarro"
+        },
+        "nuevoPiso": {
+            "action": "legacy",
+            "icon": "add_circle",
+            "serverAction": "nuevoPiso"
+        },
+        "volverMaster": {
+            "action": "return"
+        },
+        "siguienteCarro": {
+            "action": "clientAct",
+            "name": "siguienteCarro",
+            "otros": "numcarro",
+            "persistente": "numcarro"
+
+        },
+        "anteriorCarro": {
+            "action": "clientAct",
+            "name": "anteriorCarro",
+            "otros": "numcarro",
+            "persistente": "numcarro"
+        },
+        "editarMontado": {
+            "action": "link",
+            "template": "lineaspedidoscli",
+            "custom": "editarcarrospisos",
+            "rel": "idlinea"
+        }
+    },
+    "drawIf": {
+        "groupBoxCargaImagen": {
+            "nuevoPedido": {
+                "tipo": "hidden",
+                "condiciones": [
+                    {
+                        "tipo": "!=",
+                        "campo": "servido",
+                        "valor": "Parcial"
+                    }
+                ]
+            }
+        },
+        "queryGrid_articulosporcarro": {
+            "lineascarro.cantpiso1": "drawPiso1",
+            "lineascarro.cantpiso2": "drawPiso2",
+            "lineascarro.cantpiso3": "drawPiso3",
+            "lineascarro.cantpiso4": "drawPiso4",
+            "lineascarro.cantpiso5": "drawPiso5",
+            "lineascarro.cantpiso6": "drawPiso6",
+            "lineascarro.cantpiso7": "drawPiso7",
+            "lineascarro.cantpiso8": "drawPiso8",
+            "lineascarro.cantpiso9": "drawPiso9",
+            "lineascarro.cantpiso10": "drawPiso10",
+            "lineascarro.cantpiso11": "drawPiso11",
+            "lineascarro.cantpiso12": "drawPiso12"
+        }
+    }
+}
+
+

@@ -1,0 +1,111 @@
+{
+    "initValidation": {
+        "error": {
+            "aplic": "almacen",
+            "prefix": "vb_fincasusu",
+            "template": "fincasusu",
+            "msg": "Debes seleccionar una finca local"
+        }
+    },
+    "querystring": {
+        "p_l": 50,
+        "p_c": true,
+        "o_1": "codalmacen",
+        "f_fincaUsuario": null
+    },
+    "schema": {},
+    "focus": "fdb_codBarras",
+    "layout": {
+        "fdb_codBarras": {
+            "componente": "YBFieldDB",
+            "prefix": "otros",
+            "key": "referencia",
+            "desc": "descripcion",
+            "disabled_name": "Descripción",
+            "auto_name": "Codigo de barras",
+            "disabled_field": "descripcion",
+            "auto_field": "referencia",
+            "search": {
+                "referencia": null
+            },
+            "tipo": "56",
+            "rel": "articulos",
+            "className": "relatedField",
+            "actions": [
+                {"signal": "enterPressed", "key": "filtraTablaStocks", "success": []}
+            ]
+        },
+        "stocksGrid": {
+            "label": "Stocks",
+            "componente": "YBTable",
+            "class": "claseGrid",
+            "prefix": "stocks",
+            "paginacion": false,
+            "filter": false,
+            "columns": [
+                {"tipo": "field", "key": "pk", "width": 70, "label": "label"},
+                {"tipo": "field", "key": "codalmacen", "width": 70},
+                {"tipo": "field", "key": "referencia"},
+                {"tipo": "field", "key": "vb_codubicacion"},
+                {"tipo": "field", "key": "detalleubicacion"},
+                {
+                    "tipo": "field",
+                    "key": "cantidad",
+                    "editable": true,
+                    "act": {
+                        "key": "nuevaLineaRegStock",
+                        "success": [{"slot": "refrescar", "filter": true}]
+                    }
+                },
+                {
+                    "tipo": "act",
+                    "key": "delete",
+                    "label": "Delete",
+                    "success": [{"slot": "refrescar"}]
+                },
+                {
+                    "tipo": "act",
+                    "key": "prueba",
+                    "label": "Delete",
+                    "success": [{"slot": "refrescar"}]
+                }
+            ],
+            "rowclick": ""
+        },
+        "newRecordInventarios": {
+            "componente": "YBNewRecord",
+            "class": "info",
+            "icon": "add"
+        }
+    },
+    "acciones": {
+        "delete": {
+            "label": "Prueba",
+            "action": "deleteRow",
+            "icon": "delete"
+        },
+        "nuevaLineaRegStock": {
+            "action": "legacy",
+            "icon": "payment",
+            "serverAction": "nuevaLineaRegStock",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "cantidad",
+                    "key": "cantidad",
+                    "validaciones": null
+                }
+            ]
+        },
+        "prueba": {
+            "action": "legacy",
+            "icon": "payment",
+            "serverAction": "prueba"
+        },
+        "filtraTablaStocks": {
+            "action": "gridFilter",
+            "prefix": "stocks",
+            "layout": "stocksGrid"
+        }
+    }
+}

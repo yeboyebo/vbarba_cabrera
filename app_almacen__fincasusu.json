@@ -1,0 +1,47 @@
+{
+    "querystring": {},
+    "schema": {},
+    "layout": {
+        "codalmacen": {
+            "componente": "YBFieldDB",
+            "prefix": "otros",
+            "desc_name": "Finca",
+            "auto_name": "Finca",
+            "verbose_name": "Finca",
+            "tipo": 5,
+            "rel": "vb_fincasusu",
+            "key": "codfinca",
+            "desc": "codfinca",
+            "filtro": {
+                "idusuario": null
+            },
+            "showpk": false,
+            "actions": [{
+                "key": "estableceFincaLocal",
+                "signal": "enterPressed",
+                "receiver": "tdb_inventarios",
+                "pk": "000001",
+                "success": [{"slot": "goto"}]
+            }]
+        }
+    },
+    "acciones": {
+        "sessionStore": {
+            "action": "sessionStore"
+        },
+        "estableceFincaLocal": {
+            "label": "Finca local",
+            "action": "legacy",
+            "icon": "payment",
+            "serverAction": "establecerFinca",
+            "params": [
+                {
+                    "tipo": 3,
+                    "verbose_name": "codfinca",
+                    "key": "codfinca",
+                    "validaciones": null
+                }
+            ]
+        }
+    }
+}

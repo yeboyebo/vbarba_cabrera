@@ -1,0 +1,63 @@
+{
+    "modifications": [
+        {
+            "type": "insertAfterNode",
+            "path": "/root",
+            "value": {
+                "querystring": {}
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/querystring",
+            "value": {
+                "schema": {}
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/schema",
+            "value": {
+                "layout": {
+                    "articulosprovForm": {
+                        "prefix": "articulosprov",
+                        "componente": "YBForm",
+                        "class": "claseGrid",
+                        "submit": "create",
+                        "return": true,
+                        "success": [
+                            {
+                                "slot": "return"
+                            }
+                        ],
+                        "fields": {
+                            "gb__": {
+                                "fields": {
+                                    "referencia": {
+                                        "disabled": true
+                                    },
+                                    "codproveedor": {
+                                        "rel": "proveedores",
+                                        "key": "codproveedor",
+                                        "desc": "nombre",
+                                        "auto_field": "nombre",
+                                        "desc_name": "Nombre"
+                                    },
+                                    "codbarras": {},
+                                    "coste": {},
+                                    "dto": {},
+                                    "costereal": {
+                                        "label": "Coste Real",
+                                        "disabled": true
+                                    },
+                                    "disponible": {}
+                                }
+                            }
+                        },
+                        "exclude": {}
+                    }
+                }
+            }
+        }
+    ]
+}

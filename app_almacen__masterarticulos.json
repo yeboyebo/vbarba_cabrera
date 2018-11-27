@@ -1,0 +1,95 @@
+{
+    "modifications": [
+        {
+            "type": "insertAfterNode",
+            "path": "/root",
+            "value": {
+                "querystring": {
+                    "p_l": 50,
+                    "p_c": true,
+                    "o_1": "referencia",
+                    "s_obsoleto__exact": false
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/querystring",
+            "value": {
+                "schema": {}
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/schema",
+            "value": {
+                "layout": {
+                    "fdb_codBarras": {
+                        "componente": "YBFieldDB",
+                        "prefix": "otros",
+                        "key": "referencia",
+                        "desc": "descripcion",
+                        "auto_name": "Lectura",
+                        "auto_field": "descripcion",
+                        "function": "getCodBarrasProv",
+                        "firstOnEnter": false,
+                        "tipo": "55",
+                        "rel": "articulos",
+                        "className": "relatedField",
+                        "showpk": false,
+                        "actions": [
+                            {
+                                "signal": "enterPressed",
+                                "key": "filtraTablaArticulos",
+                                "success": []
+                            }
+                        ]
+                    },
+                    "articulosGrid": {
+                        "componente": "YBTable",
+                        "class": "claseGrid",
+                        "prefix": "master",
+                        "filter": false,
+                        "columns": [
+                            {
+                                "tipo": "field",
+                                "key": "referencia",
+                                "pk": "true",
+                                "width": 100
+                            },
+                            {
+                                "tipo": "field",
+                                "key": "descripcion",
+                                "width": 300
+                            },
+                            {
+                                "tipo": "field",
+                                "key": "pvp",
+                                "width": 50
+                            },
+                            {
+                                "tipo": "field",
+                                "key": "fechamod",
+                                "width": 100
+                            }
+                        ],
+                        "rowclick": "link"
+                    }
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/layout",
+            "value": {
+                "acciones": {
+                    "filtraTablaArticulos": {
+                        "action": "gridFilter",
+                        "prefix": "articulos",
+                        "layout": "articulosGrid"
+                    }
+                }
+            }
+        }
+    ]
+}
