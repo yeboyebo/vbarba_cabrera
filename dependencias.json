@@ -1,10 +1,14 @@
 {
-    "fun_aq": null,
+    "fun_aq": "fun_vbarba",
     "fk": "True",
     "dependencias": [
         {
             "version": "v1.0",
             "key": "baseparche"
+        },
+        {
+            "key": "new_oficial",
+            "version": "v1.0"
         }
     ]
 }
