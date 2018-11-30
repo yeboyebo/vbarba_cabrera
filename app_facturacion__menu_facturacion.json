@@ -1,26 +1,26 @@
 {
     "modifications": [
         {
-            "type": "insertAfterNode",
-            "path": "/root",
+            "type": "insertAfterItem",
+            "path": "/items[root]",
             "value": {
-                "items": [
-                    {
-                        "NAME": "carros",
-                        "TEXT": "CARROS",
-                        "URL": "facturacion/pedidoscli/custom/mastercarros",
-                        "ICON": "content_paste",
-                        "COLOR": "rgb(30, 170, 30)"
-                    },
-                    {
-                        "NAME": "Pedidos de cliente",
-                        "TEXT": "Pedidos de cliente",
-                        "URL": "facturacion/pedidoscli/master",
-                        "ICON": "dashboard",
-                        "VISIBLE": true,
-                        "COLOR": "rgb(30, 170, 30)"
-                    }
-                ]
+                "NAME": "carros",
+                "TEXT": "CARROS",
+                "URL": "facturacion/pedidoscli/custom/mastercarros",
+                "ICON": "content_paste",
+                "COLOR": "rgb(30, 170, 30)"
+            }
+        },
+        {
+            "type": "insertAfterItem",
+            "path": "/items[carros]",
+            "value": {
+                "NAME": "Pedidos de cliente",
+                "TEXT": "Pedidos de cliente",
+                "URL": "facturacion/pedidoscli/master",
+                "ICON": "dashboard",
+                "VISIBLE": true,
+                "COLOR": "rgb(30, 170, 30)"
             }
         }
     ]
