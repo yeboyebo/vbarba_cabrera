@@ -1,6 +1,4 @@
 
-/** @delete_class oficial */
-
 # @class_declaration vbarba_cabrera #
 from YBLEGACY.constantes import *
 from YBUTILS.viewREST import cacheController
@@ -48,9 +46,16 @@ class vbarba_cabrera(interna):
             q.setWhere(ustr(u"idpedido = '", curLinea.valueBuffer("idpedido"), "'"))
             if q.exec_():
                 if q.next():
-                    if(q.value(0) == q.value(1)):
+                    totalCantidad = q.value(0)
+                    totalCantMontada = q.value(1)
+                    if not totalCantidad or totalCantidad == u"undefined":
+                        totalCantidad = 0
+                    if not totalCantMontada or totalCantMontada == u"undefined":
+                        totalCantMontada = 0
+                    # if(q.value(0) == q.value(1)):
+                    if totalCantidad == totalCantMontada:
                         cursor.setValueBuffer("montado", 'Si')
-                    elif q.value(1) > 0:
+                    elif totalCantMontada > 0:
                         cursor.setValueBuffer("montado", 'Parcial')
                     else:
                         cursor.setValueBuffer("montado", 'No')
@@ -83,7 +88,7 @@ class vbarba_cabrera(interna):
 
         return True
 
-    def vbarba_bufferCommited_lineaspedidoscli(self, curLinea=None):
+    def vbarba_cabrera_bufferCommited_lineaspedidoscli(self, curLinea=None):
         # _i = self.iface
         curPedido = qsatype.FLSqlCursor(u"pedidoscli")
         curPedido.select(ustr(u"idpedido = ", curLinea.valueBuffer(u"idpedido")))
@@ -119,5 +124,5 @@ class vbarba_cabrera(interna):
         return self.ctx.vbarba_cabrera_comprobarMontadoPedido(curLinea)
 
     def bufferCommited_lineaspedidoscli(self, curLinea=None):
-        return self.ctx.vbarba_bufferCommited_lineaspedidoscli(curLinea)
+        return self.ctx.vbarba_cabrera_bufferCommited_lineaspedidoscli(curLinea)
 

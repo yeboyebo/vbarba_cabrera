@@ -252,7 +252,7 @@
             "colorRowField": "rowColor",
             "type": "query",
             "columns": [
-                {"tipo": "field", "key": "lineaspedidoscli.referencia", "label": "Referencia", "width": 100, "flex": 2},
+                {"tipo": "foreignfield", "key": "lineaspedidoscli.referencia", "label": "Referencia", "width": 100, "flex": 2},
                 {"tipo": "field", "key": "lineaspedidoscli.aliasprov", "label": "Prov.", "width": 100, "flex": 2},
                 {"tipo": "field", "key": "lineaspedidoscli.descripcion", "label": "Descripción","width": 200, "flex": 5},
                 {"tipo": "field", "key": "lineaspedidoscli.cantidad", "width": 60},
@@ -457,7 +457,6 @@
         },
         "pedidoscliForm": {
             "prefix": "pedidoscli",
-            "visible": false,
             "componente": "YBForm",
             "class": "claseGrid",
             "submit": "update",
@@ -471,44 +470,9 @@
                 }
             },
             "exclude": {}
-        },
-        "groupBoxVolver": {
-            "componente": "YBGroupBox",
-            "className": "gbform",
-            "layout": {
-                "field_observaciones": {
-                    "componente": "YBFieldDB",
-                    "prefix": "pedidoscli",
-                    "className": "",
-                    "key": "observaciones",
-                    "label": "observaciones",
-                    "tipo": 6,
-                    "style": {
-                        "width": "300px"
-                    },
-                    "actions": [{
-                        "signal": "enterPressed",
-                        "key": "actObservacionesPedido"
-                    }]
-                }
-            }
         }
     },
     "acciones": {
-        "actObservacionesPedido": {
-            "label": "Lineas albaran",
-            "action": "legacy",
-            "icon": "payment",
-            "serverAction": "actObservacionesPedido",
-            "params": [
-                {
-                    "tipo": 3,
-                    "verbose_name": "observaciones",
-                    "key": "observaciones",
-                    "validaciones": null
-                }
-            ]
-        },
         "eliminarCarroActual": {
             "action": "confirmAction",
             "type": "legacy",
