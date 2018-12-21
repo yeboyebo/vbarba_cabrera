@@ -1,12 +1,10 @@
 
-/** @delete_class oficial */
-
 # @class_declaration vbarba_cabrera #
 from YBLEGACY.constantes import *
 from YBUTILS.viewREST import cacheController
 
 
-class vbarba_cabrera(interna):
+class vbarba_cabrera(flfactalma):
 
     def vbarba_cabrera_nuevaLineaRegStockInventario(self, codinventario, codalmacen, barcode, cantidad):
         # 8400001316513

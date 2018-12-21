@@ -2,7 +2,7 @@
 # @class_declaration vbarba_cabrera #
 
 
-class vbarba_cabrera(oficial):
+class vbarba_cabrera(flfacturac):
 
     def vbarba_cabrera_getForeignFields(self, model, template=None):
         if template == 'mastercarros':

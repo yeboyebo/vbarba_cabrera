@@ -4,7 +4,7 @@ from YBLEGACY.constantes import *
 from YBUTILS.viewREST import cacheController
 
 
-class vbarba_cabrera(oficial):
+class vbarba_cabrera(flfactalma):
 
     def vbarba_cabrera_iniciaValoresLabel(self, model=None, fN=None, cursor=None):
         labels = {}

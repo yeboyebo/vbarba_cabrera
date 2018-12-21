@@ -7,7 +7,7 @@ from models.flfactalma.almacenes import almacenes
 from models.flfactalma.vb_ubicaciones import vb_ubicaciones
 
 
-class vbarba_cabrera(oficial):
+class vbarba_cabrera(flfactalma):
 
     def vbarba_cabrera_cambiarUbicacion(self, model, oParam):
         if not oParam:

@@ -3,7 +3,7 @@
 from YBLEGACY.constantes import *
 
 
-class vbarba_cabrera(oficial):
+class vbarba_cabrera(flfactppal):
 
     def vbarba_cabrera_informes_getCodproveedor(self, model, oParam):
         data = []

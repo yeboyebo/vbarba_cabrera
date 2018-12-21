@@ -1,6 +1,6 @@
 
 # @class_declaration vbarba_cabrera_lineasregstocks #
-class vbarba_cabrera_lineasregstocks(oficial_lineasregstocks, helpers.MixinConAcciones):
+class vbarba_cabrera_lineasregstocks(flfactalma_lineasregstocks, helpers.MixinConAcciones):
     pass
 
     class Meta:

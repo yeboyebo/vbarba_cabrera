@@ -4,7 +4,7 @@ from YBLEGACY.constantes import *
 from YBUTILS.viewREST import cacheController
 
 
-class vbarba_cabrera(interna):
+class vbarba_cabrera(flfacturac):
 
     def vbarba_cabrera_afterCommit_lineaspedidoscli(self, curLinea=None):
         _i = self.iface

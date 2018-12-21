@@ -1,6 +1,6 @@
 
 # @class_declaration vbarba_cabrera_divisas #
-class vbarba_cabrera_divisas(oficial_divisas, helpers.MixinConAcciones):
+class vbarba_cabrera_divisas(flfactppal_divisas, helpers.MixinConAcciones):
     pass
 
     class Meta:

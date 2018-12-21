@@ -1,6 +1,6 @@
 
 # @class_declaration vbarba_cabrera_formaspago #
-class vbarba_cabrera_formaspago(oficial_formaspago, helpers.MixinConAcciones):
+class vbarba_cabrera_formaspago(flfactppal_formaspago, helpers.MixinConAcciones):
     pass
 
     class Meta:
