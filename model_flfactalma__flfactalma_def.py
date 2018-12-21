@@ -172,7 +172,7 @@ class vbarba_cabrera(flfactalma):
         return resul
 
     def __init__(self, context=None):
-        super(vbarba_cabrera, self).__init__(context)
+        super().__init__(context)
 
     def cambiaUbicacionStocks(self, model, ubicacion, detalleubicacion):
         return self.ctx.vbarba_cabrera_cambiaUbicacionStocks(model, ubicacion, detalleubicacion)

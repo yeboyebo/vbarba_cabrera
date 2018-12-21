@@ -29,7 +29,7 @@ class vbarba_cabrera(interna):
         return []
 
     def __init__(self, context=None):
-        super(vbarba_cabrera, self).__init__(context)
+        super().__init__(context)
 
     def getFilters(self, model, name, template=None):
         return self.ctx.vbarba_cabrera_getFilters(model, name, template)
@@ -39,14 +39,14 @@ class vbarba_cabrera(interna):
 class head(vbarba_cabrera):
 
     def __init__(self, context=None):
-        super(head, self).__init__(context)
+        super().__init__(context)
 
 
 # @class_declaration ifaceCtx #
 class ifaceCtx(head):
 
     def __init__(self, context=None):
-        super(ifaceCtx, self).__init__(context)
+        super().__init__(context)
 
 
 # @class_declaration FormInternalObj #

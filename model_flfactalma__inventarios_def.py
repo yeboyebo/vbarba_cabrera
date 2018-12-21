@@ -40,7 +40,7 @@ class vbarba_cabrera(flfactalma):
         return resul
 
     def __init__(self, context=None):
-        super(vbarba_cabrera, self).__init__(context)
+        super().__init__(context)
 
     def getServerData(self, model, name):
         return self.ctx.vbarba_cabrera_getServerData(model, name)

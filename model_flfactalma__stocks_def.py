@@ -141,7 +141,7 @@ class vbarba_cabrera(flfactalma):
         return True
 
     def __init__(self, context=None):
-        super(vbarba_cabrera, self).__init__(context)
+        super().__init__(context)
 
     def cambiarUbicacion(self, model, oParam):
         return self.ctx.vbarba_cabrera_cambiarUbicacion(model, oParam)

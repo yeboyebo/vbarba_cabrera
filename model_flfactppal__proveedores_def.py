@@ -28,7 +28,7 @@ class vbarba_cabrera(flfactppal):
         return data
 
     def __init__(self, context=None):
-        super(vbarba_cabrera, self).__init__(context)
+        super().__init__(context)
 
     def getCodproveedor(self, model, oParam):
         return self.ctx.vbarba_cabrera_informes_getCodproveedor(model, oParam)

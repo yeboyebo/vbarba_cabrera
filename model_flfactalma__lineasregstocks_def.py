@@ -40,7 +40,7 @@ class vbarba_cabrera(flfactalma):
         return [{'verbose_name': 'deotro', 'func': 'field_codubicacion'}]
 
     def __init__(self, context=None):
-        super(vbarba_cabrera, self).__init__(context)
+        super().__init__(context)
 
     def field_codubicacion(self, model):
         return self.ctx.vbarba_cabrera_field_codubicacion(model)

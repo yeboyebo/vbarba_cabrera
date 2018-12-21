@@ -103,7 +103,7 @@ class vbarba_cabrera(flfacturac):
         return True
 
     def __init__(self, context=None):
-        super(vbarba_cabrera, self).__init__(context)
+        super().__init__(context)
 
     def afterCommit_lineascarro(self, curLinea=None):
         return self.ctx.vbarba_cabrera_afterCommit_lineascarro(curLinea)

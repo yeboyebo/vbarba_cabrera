@@ -57,7 +57,7 @@ class vbarba_cabrera(interna):
         return filepath
 
     def __init__(self, context=None):
-        super(vbarba_cabrera, self).__init__(context)
+        super().__init__(context)
 
     def uploadimagencarro(self, request, pedido, carro):
         return self.ctx.vbarba_cabrera_uploadimagencarro(request, pedido, carro)

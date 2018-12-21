@@ -274,7 +274,7 @@ class vbarba_cabrera(flfacturac):
         return True
 
     def __init__(self, context=None):
-        super(vbarba_cabrera, self).__init__(context)
+        super().__init__(context)
 
     def getForeignFields(self, model, template=None):
         return self.ctx.vbarba_cabrera_getForeignFields(model, template)

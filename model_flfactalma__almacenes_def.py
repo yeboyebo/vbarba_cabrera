@@ -23,7 +23,7 @@ class vbarba_cabrera(flfactalma):
         return desc
 
     def __init__(self, context=None):
-        super(vbarba_cabrera, self).__init__(context)
+        super().__init__(context)
 
     def getFilters(self, model, name, template=None):
         return self.ctx.vbarba_cabrera_getFilters(model, name, template)
