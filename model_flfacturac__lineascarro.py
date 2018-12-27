@@ -18,21 +18,6 @@ class vbarba_cabrera_lineascarro(interna_lineascarro, helpers.MixinConAcciones):
     class Meta:
         proxy = True
 
-    def getForeignFields(self, template=None):
-        return form.iface.getForeignFields(self, template)
-
-    def getFilters(self, name, template=None):
-        return form.iface.getFilters(self, name, template)
-
-    def initValidation(name, data):
-        return form.iface.initValidation(name, data)
-
-    def iniciaValoresLabel(self, template=None, cursor=None, data=None):
-        return form.iface.iniciaValoresLabel(self, template, cursor)
-
-    def bChLabel(fN=None, cursor=None):
-        return form.iface.bChLabel(fN, cursor)
-
     @helpers.decoradores.accion(aqparam=["oParam", "cursor"])
     def editarCantPiso(self, oParam, cursor):
         return form.iface.editarCantPiso(self, oParam, cursor)
@@ -44,6 +29,9 @@ class lineascarro(vbarba_cabrera_lineascarro, helpers.MixinConAcciones):
 
     class Meta:
         proxy = True
+
+    def getIface(self=None):
+        return form.iface
 
 
 definitions = importlib.import_module("models.flfacturac.lineascarro_def")
