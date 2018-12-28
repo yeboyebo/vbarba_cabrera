@@ -43,8 +43,8 @@ class vbarba_cabrera_stocks(flfactalma_stocks, helpers.MixinConAcciones):
     def getFilters(self, name, template):
         return form.iface.getFilters(self, name, template)
 
-    def initValidation(name, data):
-        return form.iface.initValidation(name, data)
+    def initValidation(self, name, data):
+        return form.iface.initValidation(self, name, data)
 
     @helpers.decoradores.accion()
     def prueba(self):
