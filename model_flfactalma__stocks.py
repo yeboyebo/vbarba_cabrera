@@ -14,13 +14,13 @@ class vbarba_cabrera_stocks(flfactalma_stocks, helpers.MixinConAcciones):
     def altaStock(self, oParam):
         return form.iface.altaStock(self, oParam)
 
-    @helpers.decoradores.accion(aqparam=["oParam"])
-    def nuevaLineaRegStock(self, oParam):
-        return form.iface.nuevaLineaRegStock(self, oParam)
+    @helpers.decoradores.accion(aqparam=["oParam", "cursor"])
+    def nuevaLineaRegStock(self, oParam, cursor):
+        return form.iface.nuevaLineaRegStock(self, oParam, cursor)
 
-    @helpers.decoradores.accion(aqparam=["oParam"])
-    def sumaCantidadLineaRegStock(self, oParam):
-        return form.iface.sumaCantidadLineaRegStock(self, oParam)
+    @helpers.decoradores.accion(aqparam=["oParam", "cursor"])
+    def sumaCantidadLineaRegStock(self, oParam, cursor):
+        return form.iface.sumaCantidadLineaRegStock(self, oParam, cursor)
 
     def iniciaValoresLabel(self, fN=None, cursor=None, data=None):
         return form.iface.iniciaValoresLabel(self, fN, cursor)

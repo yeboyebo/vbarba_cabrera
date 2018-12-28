@@ -66,14 +66,15 @@ class vbarba_cabrera(flfactalma):
     def vbarba_cabrera_altaStock(self, model, oParam):
         return True
 
-    def vbarba_cabrera_nuevaLineaRegStock(self, model, oParam):
-        flfactalma_def.iface.nuevaLineaRegStock(model.idstock, model.referencia, model.cantidad, oParam['cantidad'])
-        return True
+    def vbarba_cabrera_nuevaLineaRegStock(self, model, oParam, cursor):
+        # aux = flfactalma_def.iface.nuevaLineaRegStock(model.idstock, model.referencia, model.cantidad, oParam['cantidad'])
+        aux = flfactalma_def.iface.nuevaLineaRegStock(cursor.valueBuffer("idstock"), cursor.valueBuffer("referencia"), cursor.valueBuffer("cantidad"), oParam['cantidad'])
+        return aux
 
-    def vbarba_cabrera_sumaCantidadLineaRegStock(self, model, oParam):
-        cant = parseFloat(oParam['sumacantidad']) + model.cantidad
-        flfactalma_def.iface.nuevaLineaRegStock(model.idstock, model.referencia, model.cantidad, cant)
-        return True
+    def vbarba_cabrera_sumaCantidadLineaRegStock(self, model, oParam, cursor):
+        cant = parseFloat(oParam['sumacantidad']) + cursor.valueBuffer("cantidad")
+        aux = flfactalma_def.iface.nuevaLineaRegStock(cursor.valueBuffer("idstock"), cursor.valueBuffer("referencia"), cursor.valueBuffer("cantidad"), cant)
+        return aux
 
     def vbarba_cabrera_iniciaValoresLabel(self, model=None, template=None, cursor=None):
         labels = {}
@@ -150,11 +151,11 @@ class vbarba_cabrera(flfactalma):
     def altaStock(self, model, oParam):
         return self.ctx.vbarba_cabrera_altaStock(model, oParam)
 
-    def nuevaLineaRegStock(self, model, oParam):
-        return self.ctx.vbarba_cabrera_nuevaLineaRegStock(model, oParam)
+    def nuevaLineaRegStock(self, model, oParam, cursor):
+        return self.ctx.vbarba_cabrera_nuevaLineaRegStock(model, oParam, cursor)
 
-    def sumaCantidadLineaRegStock(self, model, oParam):
-        return self.ctx.vbarba_cabrera_sumaCantidadLineaRegStock(model, oParam)
+    def sumaCantidadLineaRegStock(self, model, oParam, cursor):
+        return self.ctx.vbarba_cabrera_sumaCantidadLineaRegStock(model, oParam, cursor)
 
     def iniciaValoresLabel(self, model=None, template=None, cursor=None):
         return self.ctx.vbarba_cabrera_iniciaValoresLabel(model, template, cursor)
