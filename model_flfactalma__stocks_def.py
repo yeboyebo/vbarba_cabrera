@@ -100,7 +100,8 @@ class vbarba_cabrera(flfactalma):
         return 0
 
     def vbarba_cabrera_field_nombreAlmacen(self, model):
-        almacen = almacenes.objects.get(pk=model.codalmacen)
+        # almacen = almacenes.objects.get(pk=model.codalmacen)
+        almacen = model.codalmacen
         return almacen.nombre
 
     def vbarba_cabrera_getForeignFields(self, model, template):
