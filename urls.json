@@ -2,26 +2,6 @@
     "modifications": [
         {
             "type": "insertAfterNode",
-            "path": "/almacen/root",
-            "value": {
-                "imagen": {
-                    "url": "imagen/(?P<param>(.*))",
-                    "func": "imagen"
-                }
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/almacen/imagen",
-            "value": {
-                "uploadimage": {
-                    "url": "uploadimage/(?P<param>(.*))",
-                    "func": "uploadimage"
-                }
-            }
-        },
-        {
-            "type": "insertAfterNode",
             "path": "/facturacion/root",
             "value": {
                 "imagencarro": {
@@ -42,30 +22,22 @@
         },
         {
             "type": "insertAfterNode",
-            "path": "/models/flfactppal/zonasgeo",
+            "path": "/almacen/root",
             "value": {
-                "historicos": null
+                "imagen": {
+                    "url": "imagen/(?P<param>(.*))",
+                    "func": "imagen"
+                }
             }
         },
         {
             "type": "insertAfterNode",
-            "path": "/models/flfactalma/lineasregstocks",
+            "path": "/almacen/imagen",
             "value": {
-                "vb_almacenesusu": null
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/models/flfactalma/vb_almacenesusu",
-            "value": {
-                "vb_fincasusu": null
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/models/flfactalma/vb_fincasusu",
-            "value": {
-                "vb_ubicaciones": null
+                "uploadimage": {
+                    "url": "uploadimage/(?P<param>(.*))",
+                    "func": "uploadimage"
+                }
             }
         },
         {
@@ -87,6 +59,41 @@
             "path": "/models/flfacturac/montadospedido",
             "value": {
                 "lineascarrospisos": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactalma/lineasregstocks",
+            "value": {
+                "vb_almacenesusu": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactalma/vb_almacenesusu",
+            "value": {
+                "vb_fincasusu": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactalma/vb_fincasusu",
+            "value": {
+                "movistock": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactalma/movistock",
+            "value": {
+                "vb_ubicaciones": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactppal/zonasgeo",
+            "value": {
+                "historicos": null
             }
         }
     ]

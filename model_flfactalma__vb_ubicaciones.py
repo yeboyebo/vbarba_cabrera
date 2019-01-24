@@ -29,6 +29,9 @@ class vb_ubicaciones(vbarba_cabrera_vb_ubicaciones, helpers.MixinConAcciones):
     class Meta:
         proxy = True
 
+    def getIface(self=None):
+        return form.iface
+
 
 definitions = importlib.import_module("models.flfactalma.vb_ubicaciones_def")
 form = definitions.FormInternalObj()

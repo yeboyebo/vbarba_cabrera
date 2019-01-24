@@ -6,10 +6,10 @@ from YBUTILS.viewREST import cacheController
 
 class vbarba_cabrera(flfactalma):
 
-    def vbarba_cabrera_iniciaValoresLabel(self, model=None, fN=None, cursor=None):
+    def vbarba_cabrera_iniciaValoresLabel(self, model=None, template=None, cursor=None, data=None):
         labels = {}
         fincaUsr = cacheController.getSessionVariable(ustr(u"fincaUsr_", qsatype.FLUtil.nameUser()))
-        if fN == 'stock':
+        if template == 'stock':
             almacenes = []
             query = qsatype.FLSqlQuery()
             query.setTablesList(u"almacenes")
@@ -28,7 +28,7 @@ class vbarba_cabrera(flfactalma):
                 q.setTablesList(u"stocks")
                 q.setSelect(u"sum(cantidad)")
                 q.setFrom(u"stocks")
-                q.setWhere(ustr(u"codalmacen IN ('", alma, u"') AND referencia = '", model.referencia, "'"))
+                q.setWhere(ustr(u"codalmacen IN ('", alma, u"') AND referencia = '", str(cursor.valueBuffer("referencia")), "'"))
 
                 if q.exec_():
                     if q.next():
@@ -41,7 +41,7 @@ class vbarba_cabrera(flfactalma):
             q.setTablesList(u"stocks")
             q.setSelect(u"sum(cantidad)")
             q.setFrom(u"stocks")
-            q.setWhere(ustr(u"codalmacen IN ('", almaStr, u"') AND referencia = '", model.referencia, "'"))
+            q.setWhere(ustr(u"codalmacen IN ('", almaStr, u"') AND referencia = '", str(cursor.valueBuffer("referencia")), "'"))
 
             if q.exec_():
                 if q.next():
@@ -51,7 +51,7 @@ class vbarba_cabrera(flfactalma):
             q.setTablesList(u"vb_fincas, articulosprov")
             q.setSelect(u"a.disponible")
             q.setFrom(u"vb_fincas f INNER JOIN articulosprov a ON f.codproveedor = a.codproveedor")
-            q.setWhere(ustr(u"f.codfinca = ('", fincaUsr, u"') AND referencia = '", model.referencia, "'"))
+            q.setWhere(ustr(u"f.codfinca = ('", fincaUsr, u"') AND referencia = '", str(cursor.valueBuffer("referencia")), "'"))
             disponible = 'No'
             if q.exec_():
                 if q.size() == 0:
@@ -64,13 +64,12 @@ class vbarba_cabrera(flfactalma):
             else:
                 disponible = 'No'
 
-
             labels[u"totalStockFinca"] = totalStockFinca
             labels[u"stocksAlmacenes"] = stocksAlmacenes
             labels[u"disponibleProv"] = disponible
-        if fN == "stock" or fN == "formRecord":
+        if template == "stock" or template == "formRecord":
             tienefoto = 'No'
-            if model.tienefoto:
+            if cursor.valueBuffer("tienefoto"):
                 tienefoto = 'Sí'
             labels[u"tieneFoto"] = tienefoto
         labels[u"fincaActual"] = fincaUsr
@@ -271,8 +270,8 @@ class vbarba_cabrera(flfactalma):
     def getFilters(self, model, name, template=None):
         return self.ctx.vbarba_cabrera_getFilters(model, name, template)
 
-    def iniciaValoresLabel(self, model=None, template=None, cursor=None):
-        return self.ctx.vbarba_cabrera_iniciaValoresLabel(model, template, cursor)
+    def iniciaValoresLabel(self, model=None, template=None, cursor=None, data=None):
+        return self.ctx.vbarba_cabrera_iniciaValoresLabel(model, template, cursor, data)
 
     def vbarba_bChLabel(self, fN=None, cursor=None):
         return self.ctx.vbarba_cabrera_vbarba_bChLabel(fN, cursor)

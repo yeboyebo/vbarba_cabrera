@@ -6,20 +6,8 @@ class vbarba_cabrera_articulos(flfactalma_articulos, helpers.MixinConAcciones):
     class Meta:
         proxy = True
 
-    def getFilters(self, name, template=None):
-        return form.iface.getFilters(self, name, template)
-
-    def getForeignFields(self, template=None):
-        return form.iface.getForeignFields(self, template)
-
-    def iniciaValoresLabel(self, fN=None, cursor=None, data=None):
-        return form.iface.iniciaValoresLabel(self, fN, cursor)
-
     def vbarba_bChLabel(fN=None, cursor=None):
         return form.iface.vbarba_bChLabel(fN, cursor)
-
-    def initValidation(name, data=None):
-        return form.iface.initValidation(name, data)
 
     def cursorAccepted(cursor):
         return form.iface.cursorAccepted(cursor)
@@ -49,9 +37,6 @@ class vbarba_cabrera_articulos(flfactalma_articulos, helpers.MixinConAcciones):
 
     def field_colorRow(self):
         return form.iface.field_colorRow(self)
-
-    def getDesc():
-        return form.iface.getDesc()
 
     @helpers.decoradores.accion(aqparam=["oParam"])
     def getReferencia(self, oParam):

@@ -113,6 +113,14 @@
             {
                 "path": "models/models/",
                 "name": "model_models__clientBch.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__movistock.py"
+            },
+            {
+                "path": "models/flfactalma/",
+                "name": "model_flfactalma__movistock_def.py"
             }
         ],
         "replaceFile": [

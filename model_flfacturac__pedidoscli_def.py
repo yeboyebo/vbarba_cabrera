@@ -75,11 +75,15 @@ class vbarba_cabrera(flfacturac):
                     aux = aux - 1
         return True
 
-    def vbarba_cabrera_iniciaValoresLabel(self, model, template=None):
+    def vbarba_cabrera_iniciaValoresLabel(self, model=None, template=None, cursor=None, data=None):
         labels = {}
+
+        if template == "master":
+            return labels
+
         labels["numPiso"] = 1
         labels["numCarro"] = 1
-        numcarros = qsatype.FLUtil.sqlSelect(u"montadospedido", u"numcarros", ustr(u"idpedido = '", str(model.idpedido), u"' AND nummontado = '" + str(model.nummontados) + "'"))
+        numcarros = qsatype.FLUtil.sqlSelect(u"montadospedido", u"numcarros", ustr(u"idpedido = '", str(cursor.valueBuffer("idpedido")), u"' AND nummontado = '" + str(cursor.valueBuffer("nummontados")) + "'"))
         labels["totalCarros"] = numcarros or 1
         return labels
 
@@ -273,6 +277,43 @@ class vbarba_cabrera(flfacturac):
             return False
         return True
 
+    def vbarba_cabrera_generarPedido_clicked(self, model, oParam):
+        aChecked = oParam['selecteds'].split(u",")
+        aLineasPedCli = {}
+        response = {}
+        response['status'] = 1
+        if not aChecked[0]:
+            response['msg'] = "Error: Selecciona un elemento"
+            return response
+        print("achecked: ", aChecked)
+        # aChecked = "'41740', '41742', '41724'"
+        aChecked = str(aChecked)[1: -1]
+        aChecked = str(aChecked)
+        print(aChecked)
+        aLineasPedCli = qsatype.FactoriaModulos.get('formpedidosprov').iface.crearArray(aChecked)
+        if not aLineasPedCli:
+            response = {}
+            response['status'] = 1
+            response['msg'] = "Error: No se ha creado el array."
+            return response
+        nuevoPed = None
+        msg = ""
+        indice = 0
+        while indice < len(aLineasPedCli):
+            nuevoPed = qsatype.FactoriaModulos.get('formpedidosprov').iface.crearPedidoProvCli(indice, False, aLineasPedCli)
+            print("vbarba_cabrera_generarPedido_clicked__nuevoPed: ", nuevoPed)
+            if not nuevoPed:
+                response = {}
+                response['status'] = 1
+                response['msg'] = "Error: No se ha creado el pedido"
+                return response
+            indice += 1
+            msg += str(nuevoPed) + ", "
+        response["status"] = 2
+        response["confirm"] = "Se han generado los siguientes pedidos de proveedor: " + msg
+        response["close"] = True
+        return response
+
     def __init__(self, context=None):
         super().__init__(context)
 
@@ -285,8 +326,8 @@ class vbarba_cabrera(flfacturac):
     def initValidation(self, name, data):
         return self.ctx.vbarba_cabrera_initValidation(name, data)
 
-    def iniciaValoresLabel(self, model=None, template=None, cursor=None):
-        return self.ctx.vbarba_cabrera_iniciaValoresLabel(model, template)
+    def iniciaValoresLabel(self, model=None, template=None, cursor=None, data=None):
+        return self.ctx.vbarba_cabrera_iniciaValoresLabel(model, template, cursor, data)
 
     def bChLabel(self, fN=None, cursor=None):
         return self.ctx.vbarba_cabrera_bChLabel(fN, cursor)
@@ -368,4 +409,7 @@ class vbarba_cabrera(flfacturac):
 
     def actObservacionesPedido(self, model, oParam):
         return self.ctx.vbarba_cabrera_actObservacionesPedido(model, oParam)
+
+    def generarPedido_clicked(self, model, oParam):
+        return self.ctx.vbarba_cabrera_generarPedido_clicked(model, oParam)
 

@@ -89,3 +89,7 @@ class vbarba_cabrera_pedidoscli(flfacturac_pedidoscli, helpers.MixinConAcciones)
     def dameTemplateCarros(self):
         return form.iface.dameTemplateCarros(self)
 
+    @helpers.decoradores.accion(aqparam=["oParam"])
+    def generarPedido_clicked(self, oParam):
+        return form.iface.generarPedido_clicked(self, oParam)
+
