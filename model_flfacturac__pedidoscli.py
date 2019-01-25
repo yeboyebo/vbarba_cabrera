@@ -93,3 +93,15 @@ class vbarba_cabrera_pedidoscli(flfacturac_pedidoscli, helpers.MixinConAcciones)
     def generarPedido_clicked(self, oParam):
         return form.iface.generarPedido_clicked(self, oParam)
 
+    def dameEmailsProveedorer(self, codProveedor):
+        return form.iface.dameEmailsProveedorer(self, codProveedor)
+
+    def generarReport(self, aProveedor):
+        return form.iface.generarReport(self, aProveedor)
+
+    def enviarReport(self, aProveedor, filepath):
+        return form.iface.enviarReport(self, aProveedor, filepath)
+
+    def datosConfigMail(self):
+        return form.iface.datosConfigMail(self)
+

@@ -1,5 +1,7 @@
 
 # @class_declaration vbarba_cabrera #
+from YBUTILS import notifications
+from YBUTILS.viewREST import fileAttachment
 
 
 class vbarba_cabrera(flfacturac):
@@ -278,6 +280,7 @@ class vbarba_cabrera(flfacturac):
         return True
 
     def vbarba_cabrera_generarPedido_clicked(self, model, oParam):
+        _i = self.iface
         aChecked = oParam['selecteds'].split(u",")
         aLineasPedCli = {}
         response = {}
@@ -286,33 +289,129 @@ class vbarba_cabrera(flfacturac):
             response['msg'] = "Error: Selecciona un elemento"
             return response
         print("achecked: ", aChecked)
-        # aChecked = "'41740', '41742', '41724'"
         aChecked = str(aChecked)[1: -1]
         aChecked = str(aChecked)
         print(aChecked)
         aLineasPedCli = qsatype.FactoriaModulos.get('formpedidosprov').iface.crearArray(aChecked)
         if not aLineasPedCli:
-            response = {}
-            response['status'] = 1
-            response['msg'] = "Error: No se ha creado el array."
+            response['status'] = 2
+            response['confirm'] = "Info: No hay ninguna linea del pedido(s) asociada a proveedor."
+            response["close"] = True
             return response
-        nuevoPed = None
-        msg = ""
+        # msgEnviados = ""
+        # msgNoEnviados = ""
         indice = 0
+        contEnviados = 0
+        contNoEnviados = 0
+        nuevoPed = None
+        emailProveedor = ""
+        codProveedor = None
         while indice < len(aLineasPedCli):
-            nuevoPed = qsatype.FactoriaModulos.get('formpedidosprov').iface.crearPedidoProvCli(indice, False, aLineasPedCli)
-            print("vbarba_cabrera_generarPedido_clicked__nuevoPed: ", nuevoPed)
+            aProveedor = {}
+            try:
+                nuevoPed = qsatype.FactoriaModulos.get('formpedidosprov').iface.crearPedidoProvCli(indice, False, aLineasPedCli)
+            except Exception:
+                response['status'] = 1
+                response['confirm'] = "Error al crear pedido de proveedor."
+                response["close"] = True
+                return response
             if not nuevoPed:
                 response = {}
                 response['status'] = 1
-                response['msg'] = "Error: No se ha creado el pedido"
+                response['msg'] = "Info: No se ha creado el pedido. Comprueba si el pedido ya está asociado a proveedor"
                 return response
+            codProveedor = qsatype.FLUtil.sqlSelect(u"pedidosprov", u"codproveedor", ustr(u"codigo = '", str(nuevoPed), u"'"))
+            emailProveedor = _i.dameEmailsProveedorer(codProveedor)
+            if emailProveedor and emailProveedor != "":
+                aProveedor['codigo'] = nuevoPed
+                aProveedor['codproveedor'] = codProveedor
+                aProveedor['emailproveedor'] = emailProveedor
+                print("codigo: ", aProveedor['codigo'])
+                print("codproveedor: ", aProveedor['codproveedor'])
+                print("emailproveedor: ", aProveedor['emailproveedor'])
+                if not _i.generarReport(aProveedor):
+                    return True
+                contEnviados += 1
+                # msgEnviados += str(nuevoPed) + ", "
+            else:
+                contNoEnviados += 1
+                # msgNoEnviados += str(nuevoPed) + ", "
             indice += 1
-            msg += str(nuevoPed) + ", "
+        # msgEnviados = msgEnviados[:len(msgEnviados) - 2]
+        # msgNoEnviados = msgNoEnviados[:len(msgNoEnviados) - 2]
+        msgCab = "Se han generado " + str(indice) + " pedidos de proveedor."
+        if indice > contEnviados:
+            msgCab = "Hay pedidos que no se han podido enviar por no haber contacto asociado.Revise los pedidos y envielos desde AbanQ."
         response["status"] = 2
-        response["confirm"] = "Se han generado los siguientes pedidos de proveedor: " + msg
+        response["confirm"] = msgCab
         response["close"] = True
         return response
+
+    def vbarba_cabrera_dameEmailsProveedorer(self, codProveedor):
+        listaEmails = ""
+        emailPrincipal = qsatype.FLUtil.sqlSelect(u"proveedores", u"email", ustr(u"codproveedor = '", codProveedor, u"'"))
+
+        q = qsatype.FLSqlQuery()
+        q.setTablesList("contactosproveedores,crm_contactos")
+        q.setFrom("contactosproveedores INNER JOIN crm_contactos ON contactosproveedores.codcontacto = crm_contactos.codcontacto")
+        q.setSelect("crm_contactos.email,crm_contactos.nombre")
+        q.setWhere("contactosproveedores.codproveedor = '" + codProveedor + "' AND (crm_contactos.email <> '' AND crm_contactos.email IS NOT NULL)")
+        if not q.exec_():
+            if emailPrincipal and emailPrincipal != "":
+                listaEmails = emailPrincipal
+            return listaEmails
+        if q.size() > 1:
+            while q.next():
+                listaEmails += q.value(0) + ","
+            listaEmails = listaEmails[:len(listaEmails) - 1]
+            return listaEmails
+        else:
+            return emailPrincipal
+
+    def vbarba_cabrera_generarReport(self, aProveedor):
+        report = {}
+        report['reportName'] = "pruebacabrera"
+        report['params'] = {}
+        report['params']['WHERE'] = "pedidosprov.codigo = '" + str(aProveedor['codigo']) + u"'"
+        filename = "Pedido_" + str(aProveedor['codigo'])
+        filepath = fileAttachment.saveJReport(filename, report['reportName'], report["params"], "/tmp")
+        print(filepath)
+        if not self.enviarReport(aProveedor, filepath):
+            return False
+        return True
+
+    def vbarba_cabrera_enviarReport(self, aProveedor, filepath):
+        _i = self.iface
+        asunto = qsatype.FactoriaModulos.get('flfacturac').iface.valorDefecto(u"asuntoemail")
+        cuerpo = qsatype.FactoriaModulos.get('flfacturac').iface.valorDefecto(u"cuerpoemail")
+        if not asunto:
+            asunto = ""
+        if not cuerpo:
+            cuerpo = ""
+        oDM = {}
+        oDM = _i.datosConfigMail()
+        # connection = notifications.get_connection("smtp.gmail.com", "todos.yeboyebo@gmail.com", "555zapato", "465", "SSL")
+        connection = notifications.get_connection(oDM["hostcorreosaliente"], oDM["usuariosmtp"], oDM["passwordsmtp"], oDM["puertosmtp"], oDM["tipocxsmtp"])
+        response = notifications.sendMail(connection, oDM["usuariosmtp"], asunto, cuerpo, [aProveedor['emailproveedor']], filepath)
+        return response
+
+    def vbarba_cabrera_datosConfigMail(self):
+        oDM = {}
+        q = qsatype.FLSqlQuery()
+        q.setSelect("hostcorreosaliente, puertosmtp, tipocxsmtp, tipoautsmtp, usuariosmtp, passwordsmtp")
+        q.setFrom(u"factppal_general")
+        q.setWhere(u"1 = 1")
+        print("Consulta_: ", q.sql())
+        if not q.exec_():
+            return False
+        if q.first():
+            oDM["hostcorreosaliente"] = q.value("hostcorreosaliente")
+            oDM["puertosmtp"] = q.value("puertosmtp")
+            oDM["tipocxsmtp"] = q.value("tipocxsmtp")
+            oDM["tipoautsmtp"] = q.value("tipoautsmtp")
+            oDM["usuariosmtp"] = q.value("usuariosmtp")
+            oDM["passwordsmtp"] = q.value("passwordsmtp")
+        return oDM
 
     def __init__(self, context=None):
         super().__init__(context)
@@ -412,4 +511,16 @@ class vbarba_cabrera(flfacturac):
 
     def generarPedido_clicked(self, model, oParam):
         return self.ctx.vbarba_cabrera_generarPedido_clicked(model, oParam)
+
+    def dameEmailsProveedorer(self, codProveedor):
+        return self.ctx.vbarba_cabrera_dameEmailsProveedorer(codProveedor)
+
+    def generarReport(self, aProveedor):
+        return self.ctx.vbarba_cabrera_generarReport(aProveedor)
+
+    def enviarReport(self, aProveedor, filepath):
+        return self.ctx.vbarba_cabrera_enviarReport(aProveedor, filepath)
+
+    def datosConfigMail(self, ):
+        return self.ctx.vbarba_cabrera_datosConfigMail()
 
