@@ -281,17 +281,33 @@ class vbarba_cabrera(flfacturac):
 
     def vbarba_cabrera_generarPedido_clicked(self, model, oParam):
         _i = self.iface
+        aChecked = []
         aChecked = oParam['selecteds'].split(u",")
         aLineasPedCli = {}
+        aAsociados = []
+        aNoEmail = []
+        aFalloGenerar = []
+        aFalloEnviar = []
         response = {}
         response['status'] = 1
         if not aChecked[0]:
-            response['msg'] = "Error: Selecciona un elemento"
+            response['msg'] = "Deberías seleccionar por lo menos un pedido"
+            return response
+        for idpedido in aChecked:
+            codigo = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"codigo", ustr(u"idpedido = ", idpedido, u" AND pedido <> 'No'"))
+            if codigo:
+                aAsociados.append(codigo)
+        if aAsociados:
+            response["status"] = 2
+            if len(aAsociados) > 1:
+                response["confirm"] = "Los pedidos (%s) que ha seleccionado ya están asociados a provedor." % (", ".join(aAsociados))
+            else:
+                response["confirm"] = "El pedido (%s) que ha seleccionado ya está asociado a provedor." % (", ".join(aAsociados))
+            response["close"] = True
             return response
         print("achecked: ", aChecked)
         aChecked = str(aChecked)[1: -1]
         aChecked = str(aChecked)
-        print(aChecked)
         aLineasPedCli = qsatype.FactoriaModulos.get('formpedidosprov').iface.crearArray(aChecked)
         if not aLineasPedCli:
             response['status'] = 2
@@ -300,9 +316,12 @@ class vbarba_cabrera(flfacturac):
             return response
         # msgEnviados = ""
         # msgNoEnviados = ""
+        msgCab = ""
         indice = 0
+        contNoCrearPedidoProv = 0
+        contEmailProveedor = 0
+        contGenerados = 0
         contEnviados = 0
-        contNoEnviados = 0
         nuevoPed = None
         emailProveedor = ""
         codProveedor = None
@@ -310,38 +329,47 @@ class vbarba_cabrera(flfacturac):
             aProveedor = {}
             try:
                 nuevoPed = qsatype.FactoriaModulos.get('formpedidosprov').iface.crearPedidoProvCli(indice, False, aLineasPedCli)
-            except Exception:
-                response['status'] = 1
-                response['confirm'] = "Error al crear pedido de proveedor."
-                response["close"] = True
-                return response
-            if not nuevoPed:
+                print("Nuevo Pedido: ", nuevoPed)
+            except Exception as e:
                 response = {}
                 response['status'] = 1
-                response['msg'] = "Info: No se ha creado el pedido. Comprueba si el pedido ya está asociado a proveedor"
+                response['msg'] = "Error: No se ha creado el pedido." + e
                 return response
+            if not nuevoPed:
+                contNoCrearPedidoProv += 1
             codProveedor = qsatype.FLUtil.sqlSelect(u"pedidosprov", u"codproveedor", ustr(u"codigo = '", str(nuevoPed), u"'"))
             emailProveedor = _i.dameEmailsProveedorer(codProveedor)
             if emailProveedor and emailProveedor != "":
                 aProveedor['codigo'] = nuevoPed
                 aProveedor['codproveedor'] = codProveedor
                 aProveedor['emailproveedor'] = emailProveedor
-                print("codigo: ", aProveedor['codigo'])
-                print("codproveedor: ", aProveedor['codproveedor'])
-                print("emailproveedor: ", aProveedor['emailproveedor'])
-                if not _i.generarReport(aProveedor):
-                    return True
-                contEnviados += 1
-                # msgEnviados += str(nuevoPed) + ", "
+                filepath = _i.generarReport(aProveedor)
+                if filepath:
+                    contGenerados += 1
+                    if _i.enviarReport(aProveedor, filepath):
+                        contEnviados += 1
+                    else:
+                        aFalloEnviar.append(nuevoPed)
+                        print("aFalloEnviar: ", aFalloEnviar)
+                else:
+                    aFalloGenerar.append(nuevoPed)
+                    print("aFalloGenerar: ", aFalloGenerar)
+                contEmailProveedor += 1
             else:
-                contNoEnviados += 1
-                # msgNoEnviados += str(nuevoPed) + ", "
+                aNoEmail.append(nuevoPed)
+                print("aNoEmail: ", aNoEmail)
             indice += 1
-        # msgEnviados = msgEnviados[:len(msgEnviados) - 2]
-        # msgNoEnviados = msgNoEnviados[:len(msgNoEnviados) - 2]
-        msgCab = "Se han generado " + str(indice) + " pedidos de proveedor."
-        if indice > contEnviados:
-            msgCab = "Hay pedidos que no se han podido enviar por no haber contacto asociado.Revise los pedidos y envielos desde AbanQ."
+        if contNoCrearPedidoProv > 0:
+            msgCab = "Hay " + str(contNoCrearPedidoProv) + " pedidos de proveedor  que no se han generado."
+        if indice == contEnviados:
+            msgCab += "Se han generado " + str(indice) + " pedidos de proveedor."
+        else:
+            if indice > contEmailProveedor:
+                msgCab += "Hay pedidos de proveedor que no se han podido enviar por no haber contacto asociado (%s). Revise los pedidos y envielos desde AbanQ.\n" % (", ".join(aNoEmail))
+            if contEmailProveedor > contGenerados:
+                msgCab += "Hay pedidos de proveedor para los que no se ha podido generar el informe (%s). Revise los pedidos y genera los informes desde AbanQ.\n" % (", ".join(aFalloGenerar))
+            if contGenerados > contEnviados:
+                msgCab += "Hay pedidos de proveedor que no se han podido enviar (%s). Revise los pedidos y envielos desde AbanQ." % (", ".join(aFalloEnviar))
         response["status"] = 2
         response["confirm"] = msgCab
         response["close"] = True
@@ -370,15 +398,21 @@ class vbarba_cabrera(flfacturac):
 
     def vbarba_cabrera_generarReport(self, aProveedor):
         report = {}
-        report['reportName'] = "pruebacabrera"
+        nombreBD = qsatype.FLUtil.nameBD()
+        report['reportName'] = "vb_pedidosprov"
+        if nombreBD == u"cabrera":
+            report['reportName'] = "vb_pedidosprov"
+        elif nombreBD == u"cash":
+            report['reportName'] = "vb_cash_pedidosprov"
+        elif nombreBD == u"barnaplant":
+            report['reportName'] = "vb_bnp_pedidosprov"
+        report['reportName'] = "vb_pedidosprov"
+        print("Nombre informe: ", report['reportName'])
         report['params'] = {}
         report['params']['WHERE'] = "pedidosprov.codigo = '" + str(aProveedor['codigo']) + u"'"
         filename = "Pedido_" + str(aProveedor['codigo'])
         filepath = fileAttachment.saveJReport(filename, report['reportName'], report["params"], "/tmp")
-        print(filepath)
-        if not self.enviarReport(aProveedor, filepath):
-            return False
-        return True
+        return filepath
 
     def vbarba_cabrera_enviarReport(self, aProveedor, filepath):
         _i = self.iface
