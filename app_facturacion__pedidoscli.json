@@ -2,310 +2,334 @@
     "modifications": [
         {
             "type": "insertAfterNode",
-            "path": "/root",
+            "path": "/initValidation/root",
             "value": {
-                "querystring": {}
+                "error": {}
             }
         },
         {
             "type": "insertAfterNode",
-            "path": "/querystring",
+            "path": "/schema/root",
             "value": {
-                "schema": {
-                    "lineaspedidoscli": {
-                        "rel": "idpedido",
-                        "querystring": {
-                            "p_l": 10,
-                            "p_c": 1
-                        }
+                "lineaspedidoscli": {
+                    "rel": "idpedido",
+                    "querystring": {
+                        "p_l": 10,
+                        "p_c": 1
                     }
                 }
             }
         },
         {
             "type": "insertAfterNode",
-            "path": "/schema",
+            "path": "/layout/root",
             "value": {
-                "layout": {
-                    "datoscabeceraForm": {
-                        "prefix": "pedidoscli",
-                        "componente": "YBForm",
-                        "class": "claseGrid",
-                        "submit": "update",
-                        "send": false,
-                        "success": [
-                            {
-                                "slot": "refrescar"
-                            }
-                        ],
-                        "groupbox": "",
-                        "fields": {
-                            "gb__": {
-                                "title": "",
-                                "fields": {
-                                    "codigo": {
-                                        "disabled": true
-                                    },
-                                    "codejercicio": {
-                                        "disabled": true
-                                    },
-                                    "codserie": {
-                                        "disabled": true
-                                    },
-                                    "numero": {
-                                        "disabled": true
-                                    }
-                                }
-                            }
-                        },
-                        "exclude": {}
-                    },
-                    "groupBoxPestanas": {
-                        "componente": "YBGroupBoxContainer",
-                        "className": "",
-                        "style": {},
-                        "layout": {
-                            "Cliente": {
-                                "componente": "YBGroupBox",
-                                "className": "",
-                                "style": {},
-                                "layout": {
-                                    "pedidoscliForm": {
-                                        "prefix": "pedidoscli",
-                                        "componente": "YBForm",
-                                        "class": "claseGrid",
-                                        "submit": "update",
-                                        "return": true,
-                                        "send": true,
-                                        "success": [
-                                            {
-                                                "slot": "refrescar"
-                                            }
-                                        ],
-                                        "groupbox": "",
-                                        "fields": {
-                                            "gb__": {
-                                                "title": "",
-                                                "fields": {
-                                                    "codcliente": {
-                                                        "rel": "clientes",
-                                                        "key": "codcliente",
-                                                        "desc": "nombre",
-                                                        "disabled": true
-                                                    },
-                                                    "cifnif": {
-                                                        "disabled": true
-                                                    }
-                                                }
-                                            },
-                                            "gb__Cliente": {
-                                                "title": "",
-                                                "fields": {
-                                                    "coddir": {
-                                                        "disabled": true
-                                                    },
-                                                    "direccion": {
-                                                        "disabled": true
-                                                    },
-                                                    "dirnum": {
-                                                        "disabled": true
-                                                    },
-                                                    "dirotros": {
-                                                        "disabled": true
-                                                    },
-                                                    "codpostal": {
-                                                        "disabled": true
-                                                    },
-                                                    "ciudad": {
-                                                        "disabled": true
-                                                    },
-                                                    "idprovincia": {
-                                                        "disabled": true,
-                                                        "auto_name": "Provincia"
-                                                    },
-                                                    "codpais": {
-                                                        "disabled": true
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "exclude": {}
-                                    }
-                                }
-                            },
-                            "Datos": {
-                                "componente": "YBGroupBox",
-                                "className": "",
-                                "style": {},
-                                "layout": {
-                                    "articuosForm": {
-                                        "prefix": "pedidoscli",
-                                        "componente": "YBForm",
-                                        "class": "claseGrid",
-                                        "submit": "update",
-                                        "return": true,
-                                        "success": [
-                                            {
-                                                "slot": "refrescar"
-                                            }
-                                        ],
-                                        "groupbox": "",
-                                        "fields": {
-                                            "gb__": {
-                                                "title": "",
-                                                "fields": {
-                                                    "fecha": {},
-                                                    "fechasalida": {}
-                                                }
-                                            }
-                                        },
-                                        "exclude": {}
-                                    }
-                                }
-                            },
-                            "Observaciones": {
-                                "componente": "YBGroupBox",
-                                "className": "",
-                                "style": {},
-                                "querystring": {
-                                    "articulostarifas": {
-                                        "rel": "referencia",
-                                        "querystring": {}
-                                    }
+                "datoscabeceraForm": {
+                    "prefix": "pedidoscli",
+                    "componente": "YBForm",
+                    "class": "claseGrid",
+                    "submit": "update",
+                    "send": false,
+                    "success": [
+                        {
+                            "slot": "refrescar"
+                        }
+                    ],
+                    "groupbox": "",
+                    "fields": {
+                        "gb__": {
+                            "title": "",
+                            "fields": {
+                                "codigo": {
+                                    "disabled": true
                                 },
-                                "layout": {
-                                    "articuosForm": {
-                                        "prefix": "pedidoscli",
-                                        "componente": "YBForm",
-                                        "class": "claseGrid",
-                                        "submit": "update",
-                                        "return": true,
-                                        "success": [
-                                            {
-                                                "slot": "refrescar"
-                                            }
-                                        ],
-                                        "groupbox": "",
-                                        "fields": {
-                                            "gb__": {
-                                                "title": "",
-                                                "fields": {
-                                                    "observaciones": {}
-                                                }
-                                            }
-                                        },
-                                        "exclude": {}
-                                    }
+                                "codejercicio": {
+                                    "disabled": true
+                                },
+                                "codserie": {
+                                    "disabled": true
+                                },
+                                "numero": {
+                                    "disabled": true
                                 }
                             }
                         }
                     },
-                    "articuosForm": {
-                        "prefix": "pedidoscli",
-                        "componente": "YBForm",
-                        "class": "claseGrid",
-                        "submit": "update",
-                        "send": false,
-                        "success": [
-                            {
-                                "slot": "refrescar"
-                            }
-                        ],
-                        "groupbox": "",
-                        "fields": {
-                            "gb__": {
-                                "title": "",
-                                "fields": {
-                                    "neto": {
-                                        "disabled": true
+                    "exclude": {}
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/layout/datoscabeceraForm",
+            "value": {
+                "groupBoxPestanas": {
+                    "componente": "YBGroupBoxContainer",
+                    "className": "",
+                    "style": {},
+                    "layout": {
+                        "Cliente": {
+                            "componente": "YBGroupBox",
+                            "className": "",
+                            "style": {},
+                            "layout": {
+                                "pedidoscliForm": {
+                                    "prefix": "pedidoscli",
+                                    "componente": "YBForm",
+                                    "class": "claseGrid",
+                                    "submit": "update",
+                                    "return": true,
+                                    "send": true,
+                                    "success": [
+                                        {
+                                            "slot": "refrescar"
+                                        }
+                                    ],
+                                    "groupbox": "",
+                                    "fields": {
+                                        "gb__": {
+                                            "title": "",
+                                            "fields": {
+                                                "codcliente": {
+                                                    "rel": "clientes",
+                                                    "key": "codcliente",
+                                                    "desc": "nombre",
+                                                    "disabled": true
+                                                },
+                                                "cifnif": {
+                                                    "disabled": true
+                                                }
+                                            }
+                                        },
+                                        "gb__Cliente": {
+                                            "title": "",
+                                            "fields": {
+                                                "coddir": {
+                                                    "disabled": true
+                                                },
+                                                "direccion": {
+                                                    "disabled": true
+                                                },
+                                                "dirnum": {
+                                                    "disabled": true
+                                                },
+                                                "dirotros": {
+                                                    "disabled": true
+                                                },
+                                                "codpostal": {
+                                                    "disabled": true
+                                                },
+                                                "ciudad": {
+                                                    "disabled": true
+                                                },
+                                                "idprovincia": {
+                                                    "disabled": true,
+                                                    "auto_name": "Provincia"
+                                                },
+                                                "codpais": {
+                                                    "disabled": true
+                                                }
+                                            }
+                                        }
                                     },
-                                    "totaliva": {
-                                        "disabled": true
-                                    },
-                                    "totalirpf": {
-                                        "disabled": true
-                                    },
-                                    "totalrecargo": {
-                                        "disabled": true
-                                    },
-                                    "total": {
-                                        "disabled": true
-                                    }
+                                    "exclude": {}
                                 }
                             }
                         },
-                        "exclude": {}
-                    },
-                    "masterlineaspedidoscli": {
-                        "componente": "YBGrid",
-                        "label": "Líneas",
-                        "prefix": "lineaspedidoscli",
-                        "filter": "buscador",
-                        "columns": [
-                            {
-                                "tipo": "field",
-                                "listpos": "title",
-                                "key": "referencia"
-                            },
-                            {
-                                "tipo": "field",
-                                "listpos": "body",
-                                "key": "descripcion",
-                                "width": 200,
-                                "flex": 3
-                            },
-                            {
-                                "tipo": "field",
-                                "listpos": "subtitle",
-                                "key": "cantidad"
-                            },
-                            {
-                                "tipo": "field",
-                                "listpos": "secondaryitem",
-                                "key": "pvptotal"
-                            },
-                            {
-                                "tipo": "act",
-                                "key": "delete",
-                                "label": "Borrar Linea",
-                                "success": [
-                                    {
-                                        "slot": "refrescar"
-                                    }
-                                ]
+                        "Datos": {
+                            "componente": "YBGroupBox",
+                            "className": "",
+                            "style": {},
+                            "layout": {
+                                "articuosForm": {
+                                    "prefix": "pedidoscli",
+                                    "componente": "YBForm",
+                                    "class": "claseGrid",
+                                    "submit": "update",
+                                    "return": true,
+                                    "success": [
+                                        {
+                                            "slot": "refrescar"
+                                        }
+                                    ],
+                                    "groupbox": "",
+                                    "fields": {
+                                        "gb__": {
+                                            "title": "",
+                                            "fields": {
+                                                "fecha": {},
+                                                "fechasalida": {}
+                                            }
+                                        }
+                                    },
+                                    "exclude": {}
+                                }
                             }
-                        ],
-                        "rowclick": "link",
-                        "accionesGrid": [
-                            {
-                                "key": "nuevaLinea",
-                                "label": "Nuevo",
-                                "success": []
+                        },
+                        "Observaciones": {
+                            "componente": "YBGroupBox",
+                            "className": "",
+                            "style": {},
+                            "querystring": {
+                                "articulostarifas": {
+                                    "rel": "referencia",
+                                    "querystring": {}
+                                }
+                            },
+                            "layout": {
+                                "articuosForm": {
+                                    "prefix": "pedidoscli",
+                                    "componente": "YBForm",
+                                    "class": "claseGrid",
+                                    "submit": "update",
+                                    "return": true,
+                                    "success": [
+                                        {
+                                            "slot": "refrescar"
+                                        }
+                                    ],
+                                    "groupbox": "",
+                                    "fields": {
+                                        "gb__": {
+                                            "title": "",
+                                            "fields": {
+                                                "observaciones": {}
+                                            }
+                                        }
+                                    },
+                                    "exclude": {}
+                                }
                             }
-                        ]
+                        }
                     }
                 }
             }
         },
         {
             "type": "insertAfterNode",
-            "path": "/layout",
+            "path": "/layout/groupBoxPestanas",
             "value": {
-                "acciones": {
-                    "delete": {
-                        "action": "deleteRow",
-                        "icon": "delete"
+                "articuosForm": {
+                    "prefix": "pedidoscli",
+                    "componente": "YBForm",
+                    "class": "claseGrid",
+                    "submit": "update",
+                    "send": false,
+                    "success": [
+                        {
+                            "slot": "refrescar"
+                        }
+                    ],
+                    "groupbox": "",
+                    "fields": {
+                        "gb__": {
+                            "title": "",
+                            "fields": {
+                                "neto": {
+                                    "disabled": true
+                                },
+                                "totaliva": {
+                                    "disabled": true
+                                },
+                                "totalirpf": {
+                                    "disabled": true
+                                },
+                                "totalrecargo": {
+                                    "disabled": true
+                                },
+                                "total": {
+                                    "disabled": true
+                                }
+                            }
+                        }
                     },
-                    "nuevaLinea": {
-                        "label": "Nuevo",
-                        "action": "newRow",
-                        "icon": "add_circle"
-                    },
-                    "prueba": {
-                        "label": "prueba",
-                        "action": "legacy",
-                        "serverAction": "prueba"
-                    }
+                    "exclude": {}
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/layout/articuosForm",
+            "value": {
+                "masterlineaspedidoscli": {
+                    "componente": "YBGrid",
+                    "label": "Líneas",
+                    "prefix": "lineaspedidoscli",
+                    "filter": "buscador",
+                    "columns": [
+                        {
+                            "tipo": "act",
+                            "key": "delete",
+                            "label": "Borrar Linea",
+                            "success": [
+                                {
+                                    "slot": "refrescar"
+                                }
+                            ]
+                        },
+                        {
+                            "tipo": "field",
+                            "listpos": "title",
+                            "key": "referencia"
+                        },
+                        {
+                            "tipo": "field",
+                            "listpos": "body",
+                            "key": "descripcion",
+                            "width": 200,
+                            "flex": 3
+                        },
+                        {
+                            "tipo": "field",
+                            "listpos": "subtitle",
+                            "key": "cantidad"
+                        },
+                        {
+                            "tipo": "field",
+                            "listpos": "secondaryitem",
+                            "key": "pvptotal"
+                        }
+                    ],
+                    "rowclick": "link",
+                    "accionesGrid": [
+                        {
+                            "key": "nuevaLinea",
+                            "label": "Nuevo",
+                            "success": []
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/acciones/root",
+            "value": {
+                "delete": {
+                    "action": "deleteRow",
+                    "icon": "delete"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/acciones/delete",
+            "value": {
+                "nuevaLinea": {
+                    "label": "Nuevo",
+                    "action": "newRow",
+                    "icon": "add_circle"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/acciones/nuevaLinea",
+            "value": {
+                "prueba": {
+                    "label": "prueba",
+                    "action": "legacy",
+                    "serverAction": "prueba"
                 }
             }
         }

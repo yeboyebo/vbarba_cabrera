@@ -2,40 +2,16 @@
     "modifications": [
         {
             "type": "insertAfterNode",
-            "path": "/flfactppal/usuarios",
+            "path": "/flfacturac/agruparalbaranesprov",
             "value": {
-                "flsettings": null
+                "lineascarro": null
             }
         },
         {
             "type": "insertAfterNode",
-            "path": "/flfactppal/flsettings",
+            "path": "/flfacturac/lineascarro",
             "value": {
-                "historicos": null
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/flfactalma/regstocks",
-            "value": {
-                "vb_almacenesusu": null
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/flfactalma/vb_almacenesusu",
-            "value": {
-                "vb_fincasusu": null
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/flfactalma/vb_fincasusu",
-            "value": {
-                "stocks": {
-                    "formRecord": "regstocks",
-                    "form": "masterregstocks"
-                }
+                "montadospedido": null
             }
         },
         {
@@ -61,9 +37,16 @@
         },
         {
             "type": "insertAfterNode",
-            "path": "/flfacturac/agruparalbaranesprov",
+            "path": "/flfactppal/usuarios",
             "value": {
-                "lineascarro": null
+                "flsettings": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactppal/flsettings",
+            "value": {
+                "historicos": null
             }
         }
     ]

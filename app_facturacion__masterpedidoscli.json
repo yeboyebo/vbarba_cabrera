@@ -76,7 +76,12 @@
                         {
                             "tipo": "button",
                             "key": "generaryenviarpedido",
-                            "label": "Generar y enviar pedido prov."
+                            "label": "Generar y enviar pedido prov.",
+                            "success": [
+                                {
+                                    "slot": "refrescar"
+                                }
+                            ]
                         }
                     ]
                 }

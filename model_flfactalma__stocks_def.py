@@ -76,7 +76,7 @@ class vbarba_cabrera(flfactalma):
         aux = flfactalma_def.iface.nuevaLineaRegStock(cursor.valueBuffer("idstock"), cursor.valueBuffer("referencia"), cursor.valueBuffer("cantidad"), cant)
         return aux
 
-    def vbarba_cabrera_iniciaValoresLabel(self, model=None, template=None, cursor=None):
+    def vbarba_cabrera_iniciaValoresLabel(self, model=None, template=None, cursor=None, data=None):
         labels = {}
         labels[u"fincaActual"] = cacheController.getSessionVariable(ustr(u"fincaUsr_", qsatype.FLUtil.nameUser()))
         return labels
@@ -157,8 +157,8 @@ class vbarba_cabrera(flfactalma):
     def sumaCantidadLineaRegStock(self, model, oParam, cursor):
         return self.ctx.vbarba_cabrera_sumaCantidadLineaRegStock(model, oParam, cursor)
 
-    def iniciaValoresLabel(self, model=None, template=None, cursor=None):
-        return self.ctx.vbarba_cabrera_iniciaValoresLabel(model, template, cursor)
+    def iniciaValoresLabel(self, model=None, template=None, cursor=None, data=None):
+        return self.ctx.vbarba_cabrera_iniciaValoresLabel(model, template, cursor, data)
 
     def vbarba_bChLabel(self, fN=None, cursor=None):
         return self.ctx.vbarba_cabrera_vbarba_bChLabel(fN, cursor)

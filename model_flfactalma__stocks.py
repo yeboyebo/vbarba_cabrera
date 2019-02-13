@@ -22,9 +22,6 @@ class vbarba_cabrera_stocks(flfactalma_stocks, helpers.MixinConAcciones):
     def sumaCantidadLineaRegStock(self, oParam, cursor):
         return form.iface.sumaCantidadLineaRegStock(self, oParam, cursor)
 
-    def iniciaValoresLabel(self, fN=None, cursor=None, data=None):
-        return form.iface.iniciaValoresLabel(self, fN, cursor)
-
     def vbarba_bChLabel(fN=None, cursor=None):
         return form.iface.vbarba_bChLabel(fN, cursor)
 

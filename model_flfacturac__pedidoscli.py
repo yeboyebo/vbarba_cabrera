@@ -6,10 +6,10 @@ class vbarba_cabrera_pedidoscli(flfacturac_pedidoscli, helpers.MixinConAcciones)
     class Meta:
         proxy = True
 
-    def queryGrid_articulosporcarro(self):
+    def queryGrid_articulosporcarro(self, filter):
         return form.iface.queryGrid_articulosporcarro(self)
 
-    def queryGrid_articulosporcarro_initFilter(model=None):
+    def queryGrid_articulosporcarro_initFilter(model=None, data=None):
         return form.iface.queryGrid_articulosporcarro_initFilter()
 
     def field_colorRow(cursor):

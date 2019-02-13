@@ -69,16 +69,16 @@
             "colorRowField": "rowColor",
             "paginacion": false,
             "columns": [
-                {"tipo": "field", "key": "referencia", "pk": "true", "width": 100},
-                {"tipo": "field", "key": "descripcion", "width": 300},
-                {"tipo": "field", "key": "pvp", "width": 50},
-                {"tipo": "foreignfield", "key": "artdisponible", "width": 50, "label": "Disponible"},
                 {
                     "tipo": "act",
                     "key": "actualizarDisponible",
                     "label": "Actualizar Disponible",
                     "success": [{"slot": "refrescar", "custom":"articulosStock", "filter": true}]
-                }
+                },
+                {"tipo": "field", "key": "referencia", "pk": "true", "width": 100},
+                {"tipo": "field", "key": "descripcion", "width": 300},
+                {"tipo": "field", "key": "pvp", "width": 50},
+                {"tipo": "foreignfield", "key": "artdisponible", "width": 50, "label": "Disponible"}
             ],
             "rowclick": "dameTemplateStock"
         }

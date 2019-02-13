@@ -1,5 +1,7 @@
 {
-    "initValidation": {},
+    "initValidation": {
+        "error": {}
+    },
     "querystring": {},
     "schema": {
         "lineaspedidoscli": {

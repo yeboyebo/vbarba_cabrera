@@ -79,12 +79,12 @@ class vbarba_cabrera(flfacturac):
 
     def vbarba_cabrera_iniciaValoresLabel(self, model=None, template=None, cursor=None, data=None):
         labels = {}
-
-        if template == "master":
+        if template == "master" or template == "mastercarros":
             return labels
 
         labels["numPiso"] = 1
         labels["numCarro"] = 1
+        numcarros = 0
         numcarros = qsatype.FLUtil.sqlSelect(u"montadospedido", u"numcarros", ustr(u"idpedido = '", str(cursor.valueBuffer("idpedido")), u"' AND nummontado = '" + str(cursor.valueBuffer("nummontados")) + "'"))
         labels["totalCarros"] = numcarros or 1
         return labels
@@ -97,7 +97,6 @@ class vbarba_cabrera(flfacturac):
         return 1
 
     def vbarba_cabrera_queryGrid_articulosporcarro_initFilter(self):
-        print("initfilter")
         initFilter = {}
         initFilter['where'] = u" AND lineascarro.numcarro = 1"
         initFilter['otros'] = {"numcarro": "1"}
@@ -246,9 +245,7 @@ class vbarba_cabrera(flfacturac):
         return True
 
     def vbarba_cabrera_eliminarCarroActual(self, model, oParam):
-        print("eliminar carroactual", oParam, model.idpedido)
         numcarros = qsatype.FLUtil.sqlSelect(u"montadospedido", u"numcarros", ustr(u"idpedido = '", str(model.idpedido), u"' AND nummontado = '" + str(model.nummontados) + "'"))
-        print(numcarros)
         q = qsatype.FLSqlQuery()
         q.setTablesList(u"lineaspedidoscli")
         q.setSelect(u"idlinea")
@@ -305,7 +302,6 @@ class vbarba_cabrera(flfacturac):
                 response["confirm"] = "El pedido (%s) que ha seleccionado ya está asociado a provedor." % (", ".join(aAsociados))
             response["close"] = True
             return response
-        print("achecked: ", aChecked)
         aChecked = str(aChecked)[1: -1]
         aChecked = str(aChecked)
         aLineasPedCli = qsatype.FactoriaModulos.get('formpedidosprov').iface.crearArray(aChecked)
@@ -329,7 +325,6 @@ class vbarba_cabrera(flfacturac):
             aProveedor = {}
             try:
                 nuevoPed = qsatype.FactoriaModulos.get('formpedidosprov').iface.crearPedidoProvCli(indice, False, aLineasPedCli)
-                print("Nuevo Pedido: ", nuevoPed)
             except Exception as e:
                 response = {}
                 response['status'] = 1
@@ -350,14 +345,11 @@ class vbarba_cabrera(flfacturac):
                         contEnviados += 1
                     else:
                         aFalloEnviar.append(nuevoPed)
-                        print("aFalloEnviar: ", aFalloEnviar)
                 else:
                     aFalloGenerar.append(nuevoPed)
-                    print("aFalloGenerar: ", aFalloGenerar)
                 contEmailProveedor += 1
             else:
                 aNoEmail.append(nuevoPed)
-                print("aNoEmail: ", aNoEmail)
             indice += 1
         if contNoCrearPedidoProv > 0:
             msgCab = "Hay " + str(contNoCrearPedidoProv) + " pedidos de proveedor  que no se han generado."

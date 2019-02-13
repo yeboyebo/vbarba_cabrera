@@ -193,6 +193,10 @@
             {
                 "path": "apps/almacen/templates/almacen/plantillas/",
                 "name": "app_almacen__articulosprov.json"
+            },
+            {
+                "path": "apps/almacen/templates/almacen/plantillas/",
+                "name": "app_almacen__inventarios.json"
             }
         ],
         "patchScript": [

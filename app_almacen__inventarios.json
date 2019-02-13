@@ -1,0 +1,11 @@
+{
+    "modifications": [
+        {
+            "type": "insertAfterNode",
+            "path": "/initValidation/root",
+            "value": {
+                "error": {}
+            }
+        }
+    ]
+}
