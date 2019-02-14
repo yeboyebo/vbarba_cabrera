@@ -127,6 +127,10 @@
             {
                 "name": "dependencias.json",
                 "path": "config/"
+            },
+            {
+                "name": "client.js",
+                "path": "assets/dist/js/"
             }
         ],
         "patchJson": [
