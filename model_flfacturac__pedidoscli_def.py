@@ -79,7 +79,7 @@ class vbarba_cabrera(flfacturac):
 
     def vbarba_cabrera_iniciaValoresLabel(self, model=None, template=None, cursor=None, data=None):
         labels = {}
-        if template == "master" or template == "mastercarros":
+        if template == "master" or template == "mastercarros" or template == "newrecord":
             return labels
 
         labels["numPiso"] = 1
