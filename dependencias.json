@@ -2,6 +2,10 @@
     "fun_aq": "fun_vbarba",
     "fk": "True",
     "dependencias": [
+    	{
+            "version": "v1.0",
+            "key": "celery"
+        },
         {
             "version": "v1.0",
             "key": "baseparche"

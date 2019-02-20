@@ -118,6 +118,11 @@
                     "serverAction": "generarPedido_clicked"
                 }
             }
+        },
+        {
+            "type": "deleteNode",
+            "path": "/initValidation",
+            "value": null
         }
     ]
 }
