@@ -25,7 +25,7 @@ class vbarba_cabrera(interna):
             # print(querydict)
             # print(prefix)
             # TODO no calcula PCount
-            a, dataprov, b, c = viewsets.YBMIXINCTXtemplate.cargaDatosQuery("articulosprov", querydict)
+            a, dataprov, b, c, d = viewsets.YBMIXINCTXtemplate.cargaDatosQuery("articulosprov", querydict)
             dict["rel"] = dataprov
         elif fN == "actProveedor":
             codproveedor = qsatype.FLUtil.sqlSelect(u"articulosprov", u"codproveedor", ustr(u"id = '", dict["otros"]["inputVal"], u"'"))
