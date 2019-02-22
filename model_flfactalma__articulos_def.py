@@ -243,7 +243,7 @@ class vbarba_cabrera(flfactalma):
         desc = "descripcion"
         return desc
 
-    def vbarba_cabrera_informes_getReferencia(self, model, oParam):
+    def vbarba_cabrera_getReferencia(self, model, oParam):
         data = []
         # print(oParam)
         q = qsatype.FLSqlQuery()
@@ -310,5 +310,5 @@ class vbarba_cabrera(flfactalma):
         return self.ctx.vbarba_cabrera_getDesc()
 
     def getReferencia(self, model, oParam):
-        return self.ctx.vbarba_cabrera_informes_getReferencia(model, oParam)
+        return self.ctx.vbarba_cabrera_getReferencia(model, oParam)
 

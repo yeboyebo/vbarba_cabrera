@@ -2,6 +2,7 @@
 # @class_declaration vbarba_cabrera #
 from YBUTILS import notifications
 from YBUTILS.viewREST import fileAttachment
+from facturacion import tasks
 
 
 class vbarba_cabrera(flfacturac):
@@ -43,22 +44,23 @@ class vbarba_cabrera(flfacturac):
 
     def vbarba_cabrera_initValidation(self, name, data):
         response = True
-        curPedido = qsatype.FLSqlCursor("pedidoscli")
-        curPedido.setModeAccess(curPedido.Edit)
-        curPedido.select(u"idpedido = '" + str(data['DATA']['idpedido']) + "'")
-        curPedido.refreshBuffer()
-        if curPedido.first():
-            # if not curPedido.valueBuffer("numcarros"):
-                # curPedido.setValueBuffer("numcarros", 1)
-            if not curPedido.valueBuffer("numpisos"):
-                curPedido.setValueBuffer("numpisos", 4)
-            if not curPedido.commitBuffer():
-                return False
-        numcarros = qsatype.FLUtil.sqlSelect(u"montadospedido", u"numcarros", ustr(u"idpedido = '", str(curPedido.valueBuffer("idpedido")), u"' AND nummontado = '" + str(curPedido.valueBuffer("nummontados")) + "'"))
-        if not numcarros:
-            # nummontado = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"nummontados", ustr(u"idpedido = ", data['DATA']['idpedido']))
-            qsatype.FLUtil.sqlInsert(u"montadospedido", qsatype.Array([u"idpedido", u"numcarros", u"okcomercial", u"nummontado"]), qsatype.Array([data['DATA']['idpedido'], 1, False, curPedido.valueBuffer("nummontados")]))
-            response = self.iface.creaLineasCarro(data['DATA']['idpedido'], 1, curPedido.valueBuffer("nummontados"))
+        if name == "carros":
+            curPedido = qsatype.FLSqlCursor("pedidoscli")
+            curPedido.setModeAccess(curPedido.Edit)
+            curPedido.select(u"idpedido = '" + str(data['DATA']['idpedido']) + "'")
+            curPedido.refreshBuffer()
+            if curPedido.first():
+                # if not curPedido.valueBuffer("numcarros"):
+                    # curPedido.setValueBuffer("numcarros", 1)
+                if not curPedido.valueBuffer("numpisos"):
+                    curPedido.setValueBuffer("numpisos", 4)
+                if not curPedido.commitBuffer():
+                    return False
+            numcarros = qsatype.FLUtil.sqlSelect(u"montadospedido", u"numcarros", ustr(u"idpedido = '", str(curPedido.valueBuffer("idpedido")), u"' AND nummontado = '" + str(curPedido.valueBuffer("nummontados")) + "'"))
+            if not numcarros:
+                # nummontado = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"nummontados", ustr(u"idpedido = ", data['DATA']['idpedido']))
+                qsatype.FLUtil.sqlInsert(u"montadospedido", qsatype.Array([u"idpedido", u"numcarros", u"okcomercial", u"nummontado"]), qsatype.Array([data['DATA']['idpedido'], 1, False, curPedido.valueBuffer("nummontados")]))
+                response = self.iface.creaLineasCarro(data['DATA']['idpedido'], 1, curPedido.valueBuffer("nummontados"))
         return response
 
     def vbarba_cabrera_creaLineasCarro(self, idpedido, numcarros, nummontado):
@@ -277,14 +279,11 @@ class vbarba_cabrera(flfacturac):
         return True
 
     def vbarba_cabrera_generarPedido_clicked(self, model, oParam):
-        _i = self.iface
         aChecked = []
         aChecked = oParam['selecteds'].split(u",")
+        aCodProv = []
         aLineasPedCli = {}
         aAsociados = []
-        aNoEmail = []
-        aFalloGenerar = []
-        aFalloEnviar = []
         response = {}
         response['status'] = 1
         if not aChecked[0]:
@@ -310,16 +309,10 @@ class vbarba_cabrera(flfacturac):
             response['confirm'] = "Info: No hay ninguna linea del pedido(s) asociada a proveedor."
             response["close"] = True
             return response
-        # msgEnviados = ""
-        # msgNoEnviados = ""
         msgCab = ""
         indice = 0
         contNoCrearPedidoProv = 0
-        contEmailProveedor = 0
-        contGenerados = 0
-        contEnviados = 0
         nuevoPed = None
-        emailProveedor = ""
         codProveedor = None
         while indice < len(aLineasPedCli):
             aProveedor = {}
@@ -333,111 +326,30 @@ class vbarba_cabrera(flfacturac):
             if not nuevoPed:
                 contNoCrearPedidoProv += 1
             codProveedor = qsatype.FLUtil.sqlSelect(u"pedidosprov", u"codproveedor", ustr(u"codigo = '", str(nuevoPed), u"'"))
-            emailProveedor = _i.dameEmailsProveedorer(codProveedor)
-            if emailProveedor and emailProveedor != "":
-                aProveedor['codigo'] = nuevoPed
-                aProveedor['codproveedor'] = codProveedor
-                aProveedor['emailproveedor'] = emailProveedor
-                filepath = _i.generarReport(aProveedor)
-                if filepath:
-                    contGenerados += 1
-                    if _i.enviarReport(aProveedor, filepath):
-                        contEnviados += 1
-                    else:
-                        aFalloEnviar.append(nuevoPed)
-                else:
-                    aFalloGenerar.append(nuevoPed)
-                contEmailProveedor += 1
-            else:
-                aNoEmail.append(nuevoPed)
+            aProveedor['codigo'] = nuevoPed
+            aProveedor['codproveedor'] = codProveedor
+            aCodProv.append(aProveedor)
             indice += 1
         if contNoCrearPedidoProv > 0:
             msgCab = "Hay " + str(contNoCrearPedidoProv) + " pedidos de proveedor  que no se han generado."
-        if indice == contEnviados:
+        # if indice == contEnviados:
+        #     msgCab += "Se han generado " + str(indice) + " pedidos de proveedor."
+        # else:
+        #     if indice > contEmailProveedor:
+        #         msgCab += "Hay pedidos de proveedor que no se han podido enviar por no haber contacto asociado (%s). Revise los pedidos y envielos desde AbanQ.\n" % (", ".join(aNoEmail))
+        #     if contEmailProveedor > contGenerados:
+        #         msgCab += "Hay pedidos de proveedor para los que no se ha podido generar el informe (%s). Revise los pedidos y genera los informes desde AbanQ.\n" % (", ".join(aFalloGenerar))
+        #     if contGenerados > contEnviados:
+        #         msgCab += "Hay pedidos de proveedor que no se han podido enviar (%s). Revise los pedidos y envielos desde AbanQ." % (", ".join(aFalloEnviar))
+        if indice > 1:
             msgCab += "Se han generado " + str(indice) + " pedidos de proveedor."
         else:
-            if indice > contEmailProveedor:
-                msgCab += "Hay pedidos de proveedor que no se han podido enviar por no haber contacto asociado (%s). Revise los pedidos y envielos desde AbanQ.\n" % (", ".join(aNoEmail))
-            if contEmailProveedor > contGenerados:
-                msgCab += "Hay pedidos de proveedor para los que no se ha podido generar el informe (%s). Revise los pedidos y genera los informes desde AbanQ.\n" % (", ".join(aFalloGenerar))
-            if contGenerados > contEnviados:
-                msgCab += "Hay pedidos de proveedor que no se han podido enviar (%s). Revise los pedidos y envielos desde AbanQ." % (", ".join(aFalloEnviar))
+            msgCab += "Se ha generado " + str(indice) + " pedido de proveedor."
         response["status"] = 2
         response["confirm"] = msgCab
         response["close"] = True
+        tasks.enviomail.apply_async((aCodProv,), countdown=5)
         return response
-
-    def vbarba_cabrera_dameEmailsProveedorer(self, codProveedor):
-        listaEmails = ""
-        emailPrincipal = qsatype.FLUtil.sqlSelect(u"proveedores", u"email", ustr(u"codproveedor = '", codProveedor, u"'"))
-
-        q = qsatype.FLSqlQuery()
-        q.setTablesList("contactosproveedores,crm_contactos")
-        q.setFrom("contactosproveedores INNER JOIN crm_contactos ON contactosproveedores.codcontacto = crm_contactos.codcontacto")
-        q.setSelect("crm_contactos.email,crm_contactos.nombre")
-        q.setWhere("contactosproveedores.codproveedor = '" + codProveedor + "' AND (crm_contactos.email <> '' AND crm_contactos.email IS NOT NULL)")
-        if not q.exec_():
-            if emailPrincipal and emailPrincipal != "":
-                listaEmails = emailPrincipal
-            return listaEmails
-        if q.size() > 1:
-            while q.next():
-                listaEmails += q.value(0) + ","
-            listaEmails = listaEmails[:len(listaEmails) - 1]
-            return listaEmails
-        else:
-            return emailPrincipal
-
-    def vbarba_cabrera_generarReport(self, aProveedor):
-        report = {}
-        nombreBD = qsatype.FLUtil.nameBD()
-        report['reportName'] = "vb_pedidosprov"
-        if nombreBD == u"cabrera":
-            report['reportName'] = "vb_pedidosprov"
-        elif nombreBD == u"cash":
-            report['reportName'] = "vb_cash_pedidosprov"
-        elif nombreBD == u"barnaplant":
-            report['reportName'] = "vb_bnp_pedidosprov"
-        report['reportName'] = "vb_pedidosprov"
-        print("Nombre informe: ", report['reportName'])
-        report['params'] = {}
-        report['params']['WHERE'] = "pedidosprov.codigo = '" + str(aProveedor['codigo']) + u"'"
-        filename = "Pedido_" + str(aProveedor['codigo'])
-        filepath = fileAttachment.saveJReport(filename, report['reportName'], report["params"], "/tmp")
-        return filepath
-
-    def vbarba_cabrera_enviarReport(self, aProveedor, filepath):
-        _i = self.iface
-        asunto = qsatype.FactoriaModulos.get('flfacturac').iface.valorDefecto(u"asuntoemail")
-        cuerpo = qsatype.FactoriaModulos.get('flfacturac').iface.valorDefecto(u"cuerpoemail")
-        if not asunto:
-            asunto = ""
-        if not cuerpo:
-            cuerpo = ""
-        oDM = {}
-        oDM = _i.datosConfigMail()
-        # connection = notifications.get_connection("smtp.gmail.com", "todos.yeboyebo@gmail.com", "555zapato", "465", "SSL")
-        connection = notifications.get_connection(oDM["hostcorreosaliente"], oDM["usuariosmtp"], oDM["passwordsmtp"], oDM["puertosmtp"], oDM["tipocxsmtp"])
-        response = notifications.sendMail(connection, oDM["usuariosmtp"], asunto, cuerpo, [aProveedor['emailproveedor']], filepath)
-        return response
-
-    def vbarba_cabrera_datosConfigMail(self):
-        oDM = {}
-        q = qsatype.FLSqlQuery()
-        q.setSelect("hostcorreosaliente, puertosmtp, tipocxsmtp, tipoautsmtp, usuariosmtp, passwordsmtp")
-        q.setFrom(u"factppal_general")
-        q.setWhere(u"1 = 1")
-        print("Consulta_: ", q.sql())
-        if not q.exec_():
-            return False
-        if q.first():
-            oDM["hostcorreosaliente"] = q.value("hostcorreosaliente")
-            oDM["puertosmtp"] = q.value("puertosmtp")
-            oDM["tipocxsmtp"] = q.value("tipocxsmtp")
-            oDM["tipoautsmtp"] = q.value("tipoautsmtp")
-            oDM["usuariosmtp"] = q.value("usuariosmtp")
-            oDM["passwordsmtp"] = q.value("passwordsmtp")
-        return oDM
 
     def __init__(self, context=None):
         super().__init__(context)
@@ -537,16 +449,4 @@ class vbarba_cabrera(flfacturac):
 
     def generarPedido_clicked(self, model, oParam):
         return self.ctx.vbarba_cabrera_generarPedido_clicked(model, oParam)
-
-    def dameEmailsProveedorer(self, codProveedor):
-        return self.ctx.vbarba_cabrera_dameEmailsProveedorer(codProveedor)
-
-    def generarReport(self, aProveedor):
-        return self.ctx.vbarba_cabrera_generarReport(aProveedor)
-
-    def enviarReport(self, aProveedor, filepath):
-        return self.ctx.vbarba_cabrera_enviarReport(aProveedor, filepath)
-
-    def datosConfigMail(self, ):
-        return self.ctx.vbarba_cabrera_datosConfigMail()
 

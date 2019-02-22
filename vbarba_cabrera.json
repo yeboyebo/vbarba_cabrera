@@ -121,6 +121,10 @@
             {
                 "path": "models/flfactalma/",
                 "name": "model_flfactalma__movistock_def.py"
+            },
+            {
+                "name": "app_facturacion__tasks.py",
+                "path": "apps/facturacion/"
             }
         ],
         "replaceFile": [
