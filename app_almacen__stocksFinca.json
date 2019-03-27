@@ -22,7 +22,7 @@
             "key": "referencia",
             "desc": "descripcion",
             "disabled_name": "Descripción",
-            "auto_name": "Codigo de barras",
+            "label": "Codigo de barras",
             "disabled_field": "descripcion",
             "auto_field": "referencia",
             "search": {

@@ -124,7 +124,7 @@
                                                 },
                                                 "idprovincia": {
                                                     "disabled": true,
-                                                    "auto_name": "Provincia"
+                                                    "label": "Provincia"
                                                 },
                                                 "codpais": {
                                                     "disabled": true

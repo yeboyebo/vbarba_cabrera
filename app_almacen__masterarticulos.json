@@ -29,7 +29,7 @@
                         "prefix": "otros",
                         "key": "referencia",
                         "desc": "descripcion",
-                        "auto_name": "Lectura",
+                        "label": "Lectura",
                         "auto_field": "descripcion",
                         "function": "getCodBarrasProv",
                         "firstOnEnter": false,

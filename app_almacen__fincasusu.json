@@ -6,7 +6,7 @@
             "componente": "YBFieldDB",
             "prefix": "otros",
             "desc_name": "Finca",
-            "auto_name": "Finca",
+            "label": "Finca",
             "verbose_name": "Finca",
             "tipo": 5,
             "rel": "vb_fincasusu",

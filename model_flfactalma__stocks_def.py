@@ -116,8 +116,12 @@ class vbarba_cabrera(flfactalma):
         if name == 'fincaUsuario':
             fincaUsr = cacheController.getSessionVariable(ustr(u"fincaUsr_", qsatype.FLUtil.nameUser()))
             aAlmacenes = []
-            for almacen in almacenes.objects.filter(codfinca__exact=fincaUsr):
-                aAlmacenes.append(almacen.codalmacen)
+            curAlmacenes = qsatype.FLSqlCursor("almacenes")
+            curAlmacenes.select("codfinca = '" + str(fincaUsr) + "'")
+            while curAlmacenes.next():
+                curAlmacenes.setModeAccess(curAlmacenes.Browse)
+                curAlmacenes.refreshBuffer()
+                aAlmacenes.append(curAlmacenes.valueBuffer("codalmacen"))
 
             return [{'criterio': 'codalmacen__in', 'valor': aAlmacenes}]
 

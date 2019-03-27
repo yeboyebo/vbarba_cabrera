@@ -43,7 +43,7 @@
             "aplic": "almacen",
             "key": "referencia",
             "desc": "descripcion",
-            "auto_name": "Lectura",
+            "label": "Lectura",
             "auto_field": "descripcion",
             "disabled_field": "referencia",
             "function": "getCodBarrasProv",
