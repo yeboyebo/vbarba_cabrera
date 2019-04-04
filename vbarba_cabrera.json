@@ -23,14 +23,6 @@
                 "name": "app_facturacion__mastercarros.json"
             },
             {
-                "path": "apps/portal/templates/portal/",
-                "name": "app_portal__login.html"
-            },
-            {
-                "path": "apps/portal/templates/portal/",
-                "name": "app_portal__index.html"
-            },
-            {
                 "path": "apps/almacen/templates/almacen/",
                 "name": "app_almacen__uploadimage.html"
             },
@@ -211,10 +203,6 @@
             {
                 "path": "apps/facturacion/viewset/",
                 "name": "app_facturacion__views_facturacion.py"
-            },
-            {
-                "path": "apps/portal/viewset/",
-                "name": "app_portal__views_portal.py"
             },
             {
                 "path": "apps/almacen/viewset/",
