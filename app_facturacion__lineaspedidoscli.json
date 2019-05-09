@@ -2,169 +2,168 @@
     "modifications": [
         {
             "type": "insertAfterNode",
-            "path": "/root",
+            "path": "/schema/root",
             "value": {
-                "querystring": {}
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/querystring",
-            "value": {
-                "schema": {
-                    "articulosprov": {
-                        "rel": "referencia",
-                        "fieldRelation": "referencia",
-                        "querystring": {
-                            "p_l": 30,
-                            "p_c": 1
-                        }
+                "articulosprov": {
+                    "rel": "referencia",
+                    "fieldRelation": "referencia",
+                    "querystring": {
+                        "p_l": 30,
+                        "p_c": 1
                     }
                 }
             }
         },
         {
             "type": "insertAfterNode",
-            "path": "/schema",
+            "path": "/layout/root",
             "value": {
-                "layout": {
-                    "formRecordLineaspedidoscli": {
-                        "prefix": "lineaspedidoscli",
-                        "componente": "YBForm",
-                        "class": "claseGrid",
-                        "submit": "update",
-                        "success": [
-                            {
-                                "slot": "return"
-                            }
-                        ],
-                        "groupbox": "",
-                        "return": true,
-                        "saveNew": true,
-                        "fields": {
-                            "gb__articulo": {
-                                "title": "Artículo",
-                                "fields": {
-                                    "referencia": {
-                                        "disabled": true
-                                    },
-                                    "codproveedor": {
-                                        "rel": "proveedores",
-                                        "key": "codproveedor",
-                                        "desc": "nombre",
-                                        "function": "getCodproveedor",
-                                        "params": [
-                                            "referencia"
-                                        ]
-                                    }
-                                }
-                            },
-                            "gb__cantidad": {
-                                "title": "Cantidad",
-                                "fields": {
-                                    "cantidad": {},
-                                    "vb_cantenvases": {}
-                                }
-                            },
-                            "gb__proveedor": {
-                                "title": "Proveedor",
-                                "fields": {
-                                    "aliasprov": {}
-                                }
-                            },
-                            "gb__importe": {
-                                "title": "Importe",
-                                "fields": {
-                                    "pvpreferencia": {},
-                                    "pvpunitario": {},
-                                    "pvpsindto": {},
-                                    "dtolineal": {},
-                                    "pordtopuntual": {},
-                                    "precioneto": {}
+                "formRecordLineaspedidoscli": {
+                    "prefix": "lineaspedidoscli",
+                    "componente": "YBForm",
+                    "class": "claseGrid",
+                    "submit": "update",
+                    "success": [
+                        {
+                            "slot": "return"
+                        }
+                    ],
+                    "groupbox": "",
+                    "return": true,
+                    "saveNew": true,
+                    "fields": {
+                        "gb__articulo": {
+                            "title": "Artículo",
+                            "fields": {
+                                "referencia": {
+                                    "disabled": true
+                                },
+                                "codproveedor": {
+                                    "rel": "proveedores",
+                                    "key": "codproveedor",
+                                    "desc": "nombre",
+                                    "function": "getCodproveedor",
+                                    "params": [
+                                        "referencia"
+                                    ]
                                 }
                             }
                         },
-                        "exclude": {}
-                    },
-                    "articulosprov": {
-                        "componente": "YBTable",
-                        "label": "Articulos por Proveedor",
-                        "prefix": "articulosprov",
-                        "filter": "buscador",
-                        "columns": [
-                            {
-                                "tipo": "field",
-                                "listpos": "title",
-                                "key": "codproveedor"
-                            },
-                            {
-                                "tipo": "field",
-                                "listpos": "body",
-                                "key": "nombre",
-                                "width": 200
-                            },
-                            {
-                                "tipo": "field",
-                                "listpos": "body",
-                                "key": "costereal"
-                            },
-                            {
-                                "tipo": "field",
-                                "listpos": "secondaryitem",
-                                "key": "pvp"
-                            },
-                            {
-                                "tipo": "field",
-                                "listpos": "body",
-                                "key": "pvpbnp"
-                            },
-                            {
-                                "tipo": "field",
-                                "listpos": "body",
-                                "key": "disponible",
-                                "width": 50,
-                                "label": "Disp."
-                            },
-                            {
-                                "tipo": "field",
-                                "listpos": "body",
-                                "key": "refproveedor"
-                            },
-                            {
-                                "tipo": "field",
-                                "listpos": "subtitle",
-                                "key": "descripcion",
-                                "width": 300
-                            },
-                            {
-                                "tipo": "act",
-                                "key": "delete",
-                                "label": "Borrar Linea",
-                                "success": [
-                                    {
-                                        "slot": "refrescar"
-                                    }
-                                ]
+                        "gb__cantidad": {
+                            "title": "Cantidad",
+                            "fields": {
+                                "cantidad": {},
+                                "vb_cantenvases": {}
                             }
-                        ],
-                        "rowclick": "actProveedor"
-                    }
+                        },
+                        "gb__proveedor": {
+                            "title": "Proveedor",
+                            "fields": {
+                                "aliasprov": {}
+                            }
+                        },
+                        "gb__importe": {
+                            "title": "Importe",
+                            "fields": {
+                                "pvpreferencia": {},
+                                "pvpunitario": {},
+                                "pvpsindto": {},
+                                "dtopor": {},
+                                "pordtopuntual": {},
+                                "precioneto": {}
+                            }
+                        }
+                    },
+                    "exclude": {}
                 }
             }
         },
         {
             "type": "insertAfterNode",
-            "path": "/layout",
+            "path": "/layout/formRecordLineaspedidoscli",
             "value": {
-                "acciones": {
-                    "delete": {
-                        "action": "deleteRow",
-                        "icon": "delete"
-                    },
-                    "actProveedor": {
-                        "action": "clientBufferChanged",
-                        "name": "actProveedor"
-                    }
+                "articulosprov": {
+                    "componente": "YBTable",
+                    "label": "Articulos por Proveedor",
+                    "prefix": "articulosprov",
+                    "filter": "buscador",
+                    "columns": [
+                        {
+                            "tipo": "field",
+                            "listpos": "title",
+                            "key": "codproveedor"
+                        },
+                        {
+                            "tipo": "field",
+                            "listpos": "body",
+                            "key": "nombre",
+                            "width": 200
+                        },
+                        {
+                            "tipo": "field",
+                            "listpos": "body",
+                            "key": "costereal"
+                        },
+                        {
+                            "tipo": "field",
+                            "listpos": "secondaryitem",
+                            "key": "pvp"
+                        },
+                        {
+                            "tipo": "field",
+                            "listpos": "body",
+                            "key": "pvpbnp"
+                        },
+                        {
+                            "tipo": "field",
+                            "listpos": "body",
+                            "key": "disponible",
+                            "width": 50,
+                            "label": "Disp."
+                        },
+                        {
+                            "tipo": "field",
+                            "listpos": "body",
+                            "key": "refproveedor"
+                        },
+                        {
+                            "tipo": "field",
+                            "listpos": "subtitle",
+                            "key": "descripcion",
+                            "width": 300
+                        },
+                        {
+                            "tipo": "act",
+                            "key": "delete",
+                            "label": "Borrar Linea",
+                            "success": [
+                                {
+                                    "slot": "refrescar"
+                                }
+                            ]
+                        }
+                    ],
+                    "rowclick": "actProveedor"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/acciones/root",
+            "value": {
+                "delete": {
+                    "action": "deleteRow",
+                    "icon": "delete"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/acciones/delete",
+            "value": {
+                "actProveedor": {
+                    "action": "clientBufferChanged",
+                    "name": "actProveedor"
                 }
             }
         }

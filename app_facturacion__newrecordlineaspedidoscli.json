@@ -2,135 +2,140 @@
     "modifications": [
         {
             "type": "insertAfterNode",
-            "path": "/root",
+            "path": "/schema/root",
             "value": {
-                "querystring": {}
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/querystring",
-            "value": {
-                "schema": {
-                    "articulosprov": {
-                        "rel": "referencia",
-                        "querystring": {
-                            "p_l": 20,
-                            "p_c": 1
-                        }
+                "articulosprov": {
+                    "rel": "referencia",
+                    "querystring": {
+                        "p_l": 20,
+                        "p_c": 1
                     }
                 }
             }
         },
         {
             "type": "insertAfterNode",
-            "path": "/schema",
+            "path": "/layout/root",
             "value": {
-                "layout": {
-                    "newRecordLineaspedidoscli": {
-                        "prefix": "lineaspedidoscli",
-                        "componente": "YBForm",
-                        "class": "claseGrid",
-                        "submit": "create",
-                        "success": [
-                            {
-                                "slot": "return"
-                            }
-                        ],
-                        "groupbox": "",
-                        "return": true,
-                        "saveNew": true,
-                        "fields": {
-                            "gb__articulo": {
-                                "title": "Artículo",
-                                "fields": {
-                                    "referencia": {
-                                        "rel": "articulos",
-                                        "key": "referencia",
-                                        "desc": "descripcion",
-                                        "function": "getReferencia",
-                                        "clientBch": true,
-                                        "actions": [
-                                            {
-                                                "signal": "enterPressed",
-                                                "receiver": "cantidad",
-                                                "key": "selectCantidad",
-                                                "success": []
-                                            }
-                                        ]
-                                    },
-                                    "codproveedor": {
-                                        "rel": "proveedores",
-                                        "key": "codproveedor",
-                                        "desc": "nombre",
-                                        "function": "getCodproveedor",
-                                        "params": [
-                                            "referencia"
-                                        ]
-                                    }
-                                }
-                            },
-                            "gb__cantidad": {
-                                "title": "Cantidad",
-                                "fields": {
-                                    "cantidad": {},
-                                    "vb_cantenvases": {}
-                                }
-                            },
-                            "gb__importe": {
-                                "title": "Importe",
-                                "fields": {
-                                    "pvpreferencia": {},
-                                    "pvpunitario": {},
-                                    "pvpsindto": {},
-                                    "dtolineal": {},
-                                    "pordtopuntual": {},
-                                    "precioneto": {}
+                "newRecordLineaspedidoscli": {
+                    "prefix": "lineaspedidoscli",
+                    "componente": "YBForm",
+                    "class": "claseGrid",
+                    "submit": "create",
+                    "success": [
+                        {
+                            "slot": "return"
+                        }
+                    ],
+                    "groupbox": "",
+                    "return": true,
+                    "saveNew": true,
+                    "fields": {
+                        "gb__articulo": {
+                            "title": "Artículo",
+                            "fields": {
+                                "referencia": {
+                                    "rel": "articulos",
+                                    "key": "referencia",
+                                    "desc": "descripcion",
+                                    "function": "getReferencia",
+                                    "clientBch": true,
+                                    "actions": [
+                                        {
+                                            "signal": "enterPressed",
+                                            "receiver": "cantidad",
+                                            "key": "selectCantidad",
+                                            "success": []
+                                        }
+                                    ]
+                                },
+                                "codproveedor": {
+                                    "rel": "proveedores",
+                                    "key": "codproveedor",
+                                    "desc": "nombre",
+                                    "function": "getCodproveedor",
+                                    "params": [
+                                        "referencia"
+                                    ]
                                 }
                             }
                         },
-                        "exclude": {}
-                    },
-                    "articulosprovgrid": {
-                        "label": "Articulos proveedor",
-                        "componente": "YBTable",
-                        "prefix": "articulosprov",
-                        "class": "claseGrid",
-                        "columns": [
-                            {
-                                "tipo": "field",
-                                "key": "nombre"
-                            },
-                            {
-                                "tipo": "field",
-                                "key": "pvp"
-                            },
-                            {
-                                "tipo": "foreignfield",
-                                "key": "costereal",
-                                "label": "costeReal"
+                        "gb__cantidad": {
+                            "title": "Cantidad",
+                            "fields": {
+                                "cantidad": {},
+                                "vb_cantenvases": {}
                             }
-                        ],
-                        "rowclick": "actProveedor"
-                    }
+                        },
+                        "gb__importe": {
+                            "title": "Importe",
+                            "fields": {
+                                "pvpreferencia": {},
+                                "pvpunitario": {},
+                                "pvpsindto": {},
+                                "dtopor": {},
+                                "pordtopuntual": {},
+                                "precioneto": {}
+                            }
+                        }
+                    },
+                    "exclude": {}
                 }
             }
         },
         {
             "type": "insertAfterNode",
-            "path": "/layout",
+            "path": "/layout/newRecordLineaspedidoscli",
             "value": {
-                "acciones": {
-                    "selectCantidad": {
-                        "action": "select"
-                    },
-                    "actProveedor": {
-                        "action": "clientBufferChanged",
-                        "name": "actProveedor"
-                    },
-                    "refreshTdb": {
-                        "action": "refrescar"
-                    }
+                "articulosprovgrid": {
+                    "label": "Articulos proveedor",
+                    "componente": "YBTable",
+                    "prefix": "articulosprov",
+                    "class": "claseGrid",
+                    "columns": [
+                        {
+                            "tipo": "field",
+                            "key": "nombre"
+                        },
+                        {
+                            "tipo": "field",
+                            "key": "pvp"
+                        },
+                        {
+                            "tipo": "foreignfield",
+                            "key": "costereal",
+                            "label": "costeReal"
+                        }
+                    ],
+                    "rowclick": "actProveedor"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/acciones/root",
+            "value": {
+                "selectCantidad": {
+                    "action": "select"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/acciones/selectCantidad",
+            "value": {
+                "actProveedor": {
+                    "action": "clientBufferChanged",
+                    "name": "actProveedor"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/acciones/actProveedor",
+            "value": {
+                "refreshTdb": {
+                    "action": "refrescar"
                 }
             }
         }

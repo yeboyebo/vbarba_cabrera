@@ -16,6 +16,20 @@
         },
         {
             "type": "insertAfterNode",
+            "path": "/flfacturac/montadospedido",
+            "value": {
+                "registrosexportados": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfacturac/registrosexportados",
+            "value": {
+                "registrosimportados": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
             "path": "/flfactalma/stocks",
             "value": {
                 "vb_fincas": null
