@@ -13,6 +13,10 @@
         {
             "key": "flfacturac",
             "version": "v1.0"
+        },
+        {
+            "key": "firma_albaranescli",
+            "version": "v1.0"
         }
     ]
 }
