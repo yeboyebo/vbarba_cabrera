@@ -22,6 +22,10 @@ class vbarba_cabrera(interna):
         # filename = request.POST['image']
         # print(filename)
         # return HttpResponse(renderers.JSONRenderer().render(dict()),content_type="application/json")
+        # Informar el campo 'tienefoto'
+        if not qsatype.FLUtil.execSql(u"UPDATE articulos set tienefoto = true WHERE referencia = '{}'".format(param)):
+            raise ValueError("Error al actualizar el campo tienefoto")
+            return False
         url = '/almacen/articulos/' + str(param)
         return HttpResponseRedirect(url)
 
